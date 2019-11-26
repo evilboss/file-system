@@ -36,7 +36,8 @@ const extractZip = {
 
 };
 const zip = () => {
-	const pack = onezip.pack(cwd + '/storage/zip/toCompress', cwd + '/storage/zip/pipe-io/toCompress.zip', [
+
+	const pack = onezip.pack(path.join(cwd, '/storage/zip/toCompress'), path.join(cwd, '/storage/zip/pipe-io/toCompress.zip'), [
 		'file1.txt',
 		'file2.txt',
 		'file3.txt'
