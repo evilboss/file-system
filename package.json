@@ -1,0 +1,12 @@
+{
+  "name": "file-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "mock-fs": "^4.10.3"
+  },
+  "dependencies": {
+    "unzipper": "^0.10.5"
+  }
+}
