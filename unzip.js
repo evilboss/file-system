@@ -7,10 +7,40 @@ const from = path.join(cwd, name);
 console.log(to, from, onezip);
 
 //
-const extractZip = {
+const extractZip = {};
+const zip = () => {
 
-	unzip() {
-		const extract = onezip.extract(from, to);
+	return new Promise((resolve, reject) => {
+		const pack = onezip.pack(path.join(cwd, '/storage/zip/toCompress'), path.join(cwd, '/storage/zip/pipe-io/toCompress.zip'), [
+			'file1.txt',
+			'file2.txt',
+			'file3.txt'
+		]);
+		pack.on('file', (name) => {
+			console.log(name);
+		});
+
+		pack.on('start', () => {
+			console.log('start packing');
+		});
+
+		pack.on('progress', (percent) => {
+			console.log(percent + '%');
+		});
+
+		pack.on('error', (error) => {
+			console.error(error);
+			reject(error);
+		});
+
+		pack.on('end', () => {
+			resolve('done');
+		});
+	});
+};
+const unzip = () => {
+	return new Promise((resolve, reject) => {
+		const extract = onezip.extract(path.join(cwd, '/storage/zip/pipe-io/toCompress.zip'), path.join(cwd, '/storage/zip/pipe-io/extract'));
 		extract.on('file', (name) => {
 			console.log(name);
 		});
@@ -26,40 +56,18 @@ const extractZip = {
 
 		extract.on('error', (error) => {
 			console.error(error);
+			reject(error);
 		});
 
 		extract.on('end', () => {
 			console.log('done');
+			resolve('done');
 		});
-	}
-
+	})
 
 };
-const zip = () => {
-
-	const pack = onezip.pack(path.join(cwd, '/storage/zip/toCompress'), path.join(cwd, '/storage/zip/pipe-io/toCompress.zip'), [
-		'file1.txt',
-		'file2.txt',
-		'file3.txt'
-	]);
-	pack.on('file', (name) => {
-		console.log(name);
+zip()
+	.then((result) => unzip().then().catch())
+	.catch((err) => {
+		console.error(err)
 	});
-
-	pack.on('start', () => {
-		console.log('start packing');
-	});
-
-	pack.on('progress', (percent) => {
-		console.log(percent + '%');
-	});
-
-	pack.on('error', (error) => {
-		console.error(error);
-	});
-
-	pack.on('end', () => {
-		console.log('done');
-	});
-};
-zip();
