@@ -1,7 +1,7 @@
 const Seven = require('node-7z');
 
 // myStream is an Readable stream
-const myStream = Seven.extractFull('./storage/7z/sample.7z', './storage/7z/', {
+const myStream = Seven.extractFull('./storage/7z/7z.7z', './storage/7z/extracted/', {
 	$progress: true
 });
 
