@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "directory-tree": "^2.2.4",
+    "node-7z": "^2.0.4",
     "node-unrar-js": "^0.8.1",
     "onezip": "^4.0.2",
     "tar": "^5.0.5",
