@@ -7,11 +7,13 @@
     "mock-fs": "^4.10.3"
   },
   "dependencies": {
+    "all-unpacker": "^0.1.3",
     "directory-tree": "^2.2.4",
     "node-7z": "^2.0.4",
     "node-unrar-js": "^0.8.1",
     "onezip": "^4.0.2",
     "tar": "^5.0.5",
+    "unrar": "^0.2.0",
     "unzipper": "^0.10.5"
   }
 }
