@@ -40,7 +40,6 @@ const upnackAll = (target, output) => {
 			noRecursion: true,
 			forceOverwrite: true
 		}, (err, files, info) => {
-			console.table(info);
 			if (err) reject(err);
 
 			if (files || info) resolve(files, info);
@@ -57,15 +56,9 @@ const listAll = (target) => {
 	})
 };
 const processFile = (target, outputDir) => {
-
+	upnackAll(target, outputDir).then((result, info) => {
+		console.log(result, info);
+	});
 };
-// Usage
-/*upnackAll('./storage/tar/tar.tar', './storage/tar/extracted')
-	.then((files, info) => {
-		console.log('files:', files, 'info', info);
-	}).catch((err) => {
-	console.error(err);
-});*/
 
-
-upnackAll('./storage/rar/Invoice.rar', './storage/rar/');
+processFile('./storage/rar/Invoice.rar', './storage/rar/');
