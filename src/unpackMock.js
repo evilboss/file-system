@@ -1,5 +1,26 @@
 const ua = require('all-unpacker');
+const fs = require('fs');
+const _ = require('lodash');
 
+const verifyFiles = (target) => {
+	listAll(target).then((result) => {
+		checkFiles('./storage/zip/pipe-io/extract')
+			.then((files) => {
+				const extracted = _.intersection(result, files);
+				console.log(result.length > extracted.length);
+				console.log('intersection: ', extracted, 'Uniq:', _.uniq(_.union(result, files)), result.length)
+			});
+	});
+};
+const checkFiles = (target) => {
+	return new Promise(((resolve, reject) => {
+		fs.readdir(target, (err, files) => {
+			(err) ? reject(err) : resolve(files);
+		});
+	}));
+
+
+};
 
 const upnackAll = (target, output) => {
 	return new Promise((resolve, reject) => {
@@ -14,9 +35,9 @@ const upnackAll = (target, output) => {
 
 };
 const listAll = (target) => {
-	return new Promise(() => {
-		ua.list(target, {}, (error, files, something) => {
-			console.log(error, files, something)
+	return new Promise((resolve, reject) => {
+		ua.list(target, {}, (error, files) => {
+			(error) ? reject(error) : resolve(_.drop(files));
 		})
 	})
 };
@@ -27,4 +48,6 @@ const listAll = (target) => {
 	}).catch((err) => {
 	console.error(err);
 });*/
-listAll('./storage/tar/tar.tar');
+
+
+verifyFiles('./storage/zip/pipe-io/toCompress.zip');
