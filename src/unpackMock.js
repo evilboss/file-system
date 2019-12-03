@@ -4,11 +4,14 @@ const _ = require('lodash');
 
 const verifyFiles = (target) => {
 	listAll(target).then((result) => {
-		checkFiles('./storage/zip/pipe-io/extract')
+		checkFiles('./storage/tar/extracted/tar')
 			.then((files) => {
 				const extracted = _.intersection(result, files);
-				console.log(result.length > extracted.length);
-				console.log('intersection: ', extracted, 'Uniq:', _.uniq(_.union(result, files)), result.length)
+				if (result.length > extracted.length) {
+					// TODO: get unextracted files list
+					const missingFiles = _.difference(result, extracted);
+					console.log(missingFiles);
+				}
 			});
 	});
 };
@@ -50,4 +53,4 @@ const listAll = (target) => {
 });*/
 
 
-verifyFiles('./storage/zip/pipe-io/toCompress.zip');
+verifyFiles('./storage/tar/tar.tar');
