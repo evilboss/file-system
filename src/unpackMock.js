@@ -1,7 +1,34 @@
 const ua = require('all-unpacker');
 const fs = require('fs');
 const _ = require('lodash');
+const mmm = require('mmmagic');
+const Magic = require('mmmagic').Magic;
+const readChunk = require('read-chunk');
+const fileType = require('file-type');
 
+const supportedFileFormats = [
+	'doc',
+	'ppt',
+	'xls',
+	'bmp',
+	'odt',
+	'odp',
+	'ods',
+	'rtf',
+	'pptx',
+	'docx',
+	'xlsx',
+	'tiff',
+	'xml',
+	'gif',
+	'html',
+	'pdf',
+	'png',
+	'jpg',
+	'jpeg',
+	'psd'
+];
+const supportedArchives = ['jar', 'zip', 'rar', '7z', 'tar', 'gz', 'eml', 'msg'];
 const verifyFiles = (target, outputDir) => {
 	listAll(target).then((result) => {
 		checkFiles(getOutputDir(target, outputDir))
@@ -61,6 +88,10 @@ const processFile = (target, outputDir) => {
 		console.table(result);
 	}).catch((error) => {
 		console.log('catching', error);
+		setTimeout(() => {
+			console.log('timeout')
+		}, 500);
+
 		//TODO: Log errors
 
 	});
@@ -99,4 +130,54 @@ const convertToResultArray = (output) => {
 	});
 	return result;
 };
-processFile('./storage/zip/miltidir.zip', './storage/zip/');
+const getFileType = (filePath) => {
+	const buffer = readChunk.sync(filePath, 0, fileType.minimumBytes);
+	return fileType(buffer);
+};
+const getFileInfo = (file) => {
+
+	const magic = new Magic(mmm.MAGIC_NONE);
+	const fileInfo = getFileType(file);
+
+	return new Promise(((resolve, reject) => {
+		magic.detectFile(file, (err, result) => {
+			console.error(result);
+			if (err) {
+				console.error(err);
+				reject(err)
+			} else if (result && fileInfo) {
+				const magicResult = result.split(',');
+				resolve({
+					mimeType: fileInfo.mime,
+					ext: fileInfo.ext,
+					magicType: magicResult[0].trim(),
+					version: (magicResult[1]) ? magicResult[1].trim() : null
+				});
+			}
+
+
+		});
+	}));
+
+
+};
+const decisionPoint = (file) => {
+	getFileInfo(file).then((result) => {
+		console.table([result]);
+		if (result) {
+			isSupported(result);
+		}
+	});
+
+};
+const isSupported = (fileInfo) => {
+	let operationType = '';
+	console.log(fileInfo, _.includes(supportedFileFormats, fileInfo.ext));
+	if (_.includes(supportedArchives, fileInfo.ext)) {
+		console.log('extract file')
+	} else if (_.includes(supportedFileFormats, fileInfo.ext)) {
+		console.log('convert file')
+	}
+};
+decisionPoint('./storage/zip/miltidir/IMG-9b2eba5e745c53d951b96f8eb4e4f12c-V.jpg');
+//processFile('./storage/jar/jar.jar', './storage/jar/');
