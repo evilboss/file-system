@@ -1,4 +1,4 @@
-const ua = require('all-unpacker');
+const ua = require('./unar');
 const fs = require('fs');
 const _ = require('lodash');
 const mmm = require('mmmagic');
@@ -62,10 +62,12 @@ const getOutputDir = (target, outputDir) => {
 
 const upnackAll = (target, output) => {
 	return new Promise((resolve, reject) => {
+		console.log('extract');
 		ua.unpack(target, {
 			targetDir: output,
-			noRecursion: true,
-			forceOverwrite: true
+			files: ['Invoice/invoice-template-us-neat-750px - Copy.png', 'Invoice/invoice-template-us-classic-white-750px - Copy (34).png'],
+			forceOverwrite: true,
+
 		}, (err, files, info) => {
 			if (err) reject(err);
 			if (info) {
@@ -172,12 +174,13 @@ const decisionPoint = (file) => {
 };
 const isSupported = (fileInfo) => {
 	let operationType = '';
-	console.log(fileInfo, _.includes(supportedFileFormats, fileInfo.ext));
 	if (_.includes(supportedArchives, fileInfo.ext)) {
 		console.log('extract file')
 	} else if (_.includes(supportedFileFormats, fileInfo.ext)) {
 		console.log('convert file')
 	}
 };
-decisionPoint('./storage/zip/miltidir/IMG-9b2eba5e745c53d951b96f8eb4e4f12c-V.jpg');
-//processFile('./storage/jar/jar.jar', './storage/jar/');
+//decisionPoint('./storage/rar/Invoice.rar');
+processFile('./storage/rar/Invoice.rar', './storage/extracted/');
+/*│    0    │ 'image/png' │ 'png' │ 'PNG image data' │ '1200 x 1200' │
+*/
