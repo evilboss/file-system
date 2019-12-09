@@ -11,9 +11,7 @@
 	// from http://github.com/substack/node-shell-quote, needed to remove more escaping
 	var map = require('array-map');
 
-	const quote = xs => map(xs, function (s) {
-		return String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1');
-	}).join(' ');
+	const quote = xs => map(xs, s => String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1')).join(' ');
 	//
 
 	module.exports = unpackAll.list = unpackAll;
@@ -26,9 +24,12 @@
 		//// '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"'
 		//return s;
 	};
+	/*TODO: Escape quote */
 	const escapeFileNameQuotes = s => {
+		let result = '';
+		map(s, file => result = result + "'" + file + "'");
 
-		return "'" + s + "'";
+		return result;
 		//if (isWindows()) return '"'+s+'"';
 		//// '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"'
 		//return s;
