@@ -27,8 +27,8 @@
 	/*TODO: Escape quote */
 	const escapeFileNameQuotes = s => {
 		let result = '';
-		map(s, file => result = result + "'" + file + "'");
-
+		s.forEach((file) => result = result + "'" + file + "' ");
+		console.log(result);
 		return result;
 		//if (isWindows()) return '"'+s+'"';
 		//// '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"'
@@ -147,7 +147,7 @@
 		var cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
 		if (files) {
 			console.log('files not emplty');
-			cmd = cmd.toString().replace(/FILESPLACEHOLDER/g, escapeFileNameQuotes(files.toString()));
+			cmd = cmd.toString().replace(/FILESPLACEHOLDER/g, escapeFileNameQuotes(files));
 			console.log(`FILESPLACEHOLDER!!!!!!!!!`,);
 		}
 		if (!options.quiet) log.info('cmd', cmd);

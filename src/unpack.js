@@ -28,6 +28,13 @@ const supportedFileFormats = [
 	'jpeg',
 	'psd'
 ];
+const renameFile = (currentPath, newPath) => {
+	fs.rename(currentPath, newPath, (err => console.error(err)));
+};
+const makePath = (folderPath, filename) => {
+	return `${folderPath}${filename}`;
+};
+
 const supportedArchives = ['jar', 'zip', 'rar', '7z', 'tar', 'gz', 'eml', 'msg'];
 const verifyFiles = (target, outputDir) => {
 	listAll(target).then((result) => {
@@ -65,7 +72,6 @@ const upnackAll = (target, output) => {
 		console.log('extract');
 		ua.unpack(target, {
 			targetDir: output,
-			files: ['Invoice/invoice-template-us-neat-750px - Copy.png', 'Invoice/invoice-template-us-classic-white-750px - Copy (34).png'],
 			forceOverwrite: true,
 
 		}, (err, files, info) => {
@@ -77,6 +83,24 @@ const upnackAll = (target, output) => {
 	});
 
 };
+const unpackOne = (target, output, file) => {
+	return new Promise((resolve, reject) => {
+		console.log('extract');
+		ua.unpack(target, {
+			targetDir: output,
+			files: file,
+			forceOverwrite: true,
+
+		}, (err, files, info) => {
+			if (err) reject(err);
+			if (info) {
+				resolve(convertToResultArray(info));
+			}
+		});
+	});
+
+};
+
 const listAll = (target) => {
 	return new Promise((resolve, reject) => {
 		ua.list(target, {}, (error, files) => {
@@ -85,18 +109,25 @@ const listAll = (target) => {
 		})
 	})
 };
-const processFile = (target, outputDir) => {
-	upnackAll(target, outputDir).then((result) => {
-		console.table(result);
-	}).catch((error) => {
-		console.log('catching', error);
-		setTimeout(() => {
-			console.log('timeout')
-		}, 500);
+const processFile = (target, account) => {
 
-		//TODO: Log errors
-
-	});
+	/*
+		upnackAll(target, outputDir).then((result) => {
+			console.table(result);
+		}).catch((error) => {
+			console.log('catching', error);
+			setTimeout(() => {
+				console.log('timeout')
+			}, 500);
+			})
+	*/
+	/*TODO: list all files
+	*		Make filepath based on account
+	* 	Rename File
+ 	* 	Unpack one by one
+	*		Move/upload unpacked file
+	* 	delete file
+	* */
 };
 const convertToResultArray = (output) => {
 	const tempArray = output.split('\n');
@@ -164,12 +195,12 @@ const getFileInfo = (file) => {
 
 };
 const decisionPoint = (file) => {
-	getFileInfo(file).then((result) => {
-		console.table([result]);
-		if (result) {
-			isSupported(result);
-		}
+	return new Promise((resolve, reject) => {
+		getFileInfo(file).then((result) => {
+			(result) ? resolve(isSupported(result)) : reject('no file')
+		});
 	});
+
 
 };
 const isSupported = (fileInfo) => {
@@ -179,6 +210,7 @@ const isSupported = (fileInfo) => {
 	} else if (_.includes(supportedFileFormats, fileInfo.ext)) {
 		console.log('convert file')
 	}
+
 };
 //decisionPoint('./storage/rar/Invoice.rar');
 processFile('./storage/rar/Invoice.rar', './storage/extracted/');
