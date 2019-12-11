@@ -201,6 +201,8 @@ const decisionPoint = (file) => {
 		});
 	});
 
+};
+
 
 const isSupported = (fileInfo) => {
 	return (_.includes(supportedArchives, fileInfo.ext)) ?
@@ -214,9 +216,10 @@ const isSupported = (fileInfo) => {
 /*│    0    │ 'image/png' │ 'png' │ 'PNG image data' │ '1200 x 1200' │
 */
 
+
 const processDesicion = () => {
 	let files = [''];
 	files.map((file, index) => {
 	});
-	decisionPoint()
+	decisionPoint();
 };
