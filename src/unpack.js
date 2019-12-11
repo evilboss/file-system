@@ -180,9 +180,16 @@ const getFileInfo = (file) => {
 				console.error(err);
 				reject(err)
 			} else if (result && fileInfo) {
-				console.log(result, fileInfo);
-				const magicResult = result.split(',');
 
+				const magicResult = result.split(',');
+				console.log(magicResult);
+
+				if (fileInfo.mime === 'application/x-msi') {
+					fileInfo.ext = (_.includes(result, 'Microsoft Office Word')) ? 'doc' : (_.includes(result, 'PowerPoint')) ?
+						'ppt' : (_.includes(result, 'Excel')) ? 'xls' : fileInfo.ext;
+
+
+				}
 				resolve({
 					mimeType: fileInfo.mime,
 					ext: fileInfo.ext,
@@ -223,24 +230,24 @@ const isSupported = (fileInfo) => {
 
 const processDesicion = () => {
 	let files = [
-		'./testStorage/DATA_Ingestion/BMP.bmp',
+		/*'./testStorage/DATA_Ingestion/BMP.bmp',*/
 		'testStorage/DATA_Ingestion/DOC.doc',
-		'testStorage/DATA_Ingestion/DOCX.docx',
+		/*'testStorage/DATA_Ingestion/DOCX.docx',
 		'testStorage/DATA_Ingestion/GIF.gif',
 		'testStorage/DATA_Ingestion/HTML.html',
 		'testStorage/DATA_Ingestion/JPEG.JPG',
 		'testStorage/DATA_Ingestion/ODP.odp',
 		'testStorage/DATA_Ingestion/ODS.ods',
 		'testStorage/DATA_Ingestion/PDF.pdf',
-		'testStorage/DATA_Ingestion/PNG.png',
+		'testStorage/DATA_Ingestion/PNG.png',*/
 		'testStorage/DATA_Ingestion/PPT.ppt',
-		'testStorage/DATA_Ingestion/PPTX.pptx',
+		/*'testStorage/DATA_Ingestion/PPTX.pptx',
 		'testStorage/DATA_Ingestion/RTF.rtf',
 		'testStorage/DATA_Ingestion/text.psd',
-		'testStorage/DATA_Ingestion/TIFF.tiff',
+		'testStorage/DATA_Ingestion/TIFF.tiff',*/
 		'testStorage/DATA_Ingestion/XLS.xls',
-		'testStorage/DATA_Ingestion/XLSX.xlsx',
-		'testStorage/DATA_Ingestion/XML.xml'
+		/*		'testStorage/DATA_Ingestion/XLSX.xlsx',
+				'testStorage/DATA_Ingestion/XML.xml'*/
 	];
 	files.map((file, index) => {
 		decisionPoint(file).then((result) => {
