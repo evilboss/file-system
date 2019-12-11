@@ -164,6 +164,7 @@ const convertToResultArray = (output) => {
 	return result;
 };
 const getFileType = (filePath) => {
+	/*TODO: support doc,xls,ppt files*/
 	const buffer = readChunk.sync(filePath, 0, fileType.minimumBytes);
 	return fileType(buffer);
 };
@@ -174,12 +175,14 @@ const getFileInfo = (file) => {
 
 	return new Promise(((resolve, reject) => {
 		magic.detectFile(file, (err, result) => {
-			console.error(result);
 			if (err) {
+				//TODO: Log in logger or add in collection error
 				console.error(err);
 				reject(err)
 			} else if (result && fileInfo) {
+				console.log(result, fileInfo);
 				const magicResult = result.split(',');
+
 				resolve({
 					mimeType: fileInfo.mime,
 					ext: fileInfo.ext,
@@ -205,11 +208,12 @@ const decisionPoint = (file) => {
 
 
 const isSupported = (fileInfo) => {
+	//console.log(fileInfo);
 	return (_.includes(supportedArchives, fileInfo.ext)) ?
 		'extract file' :
 		(_.includes(supportedFileFormats, fileInfo.ext))
 			? 'convert file' :
-			' unsupported file';
+			'unsupported file';
 };
 
 //processFile('./storage/rar/Invoice.rar', './storage/extracted/');
@@ -233,14 +237,14 @@ const processDesicion = () => {
 		'testStorage/DATA_Ingestion/PPTX.pptx',
 		'testStorage/DATA_Ingestion/RTF.rtf',
 		'testStorage/DATA_Ingestion/text.psd',
-		'testStorage/DATA_Ingestion/TIFF.TIF',
+		'testStorage/DATA_Ingestion/TIFF.tiff',
 		'testStorage/DATA_Ingestion/XLS.xls',
 		'testStorage/DATA_Ingestion/XLSX.xlsx',
 		'testStorage/DATA_Ingestion/XML.xml'
 	];
 	files.map((file, index) => {
 		decisionPoint(file).then((result) => {
-			console.log(result);
+			console.log(file, result);
 		}).catch(err => {
 			console.error(err);
 		});
