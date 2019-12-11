@@ -202,17 +202,21 @@ const decisionPoint = (file) => {
 	});
 
 
-};
 const isSupported = (fileInfo) => {
-	let operationType = '';
-	if (_.includes(supportedArchives, fileInfo.ext)) {
-		console.log('extract file')
-	} else if (_.includes(supportedFileFormats, fileInfo.ext)) {
-		console.log('convert file')
-	}
-
+	return (_.includes(supportedArchives, fileInfo.ext)) ?
+		'extract file' :
+		(_.includes(supportedFileFormats, fileInfo.ext))
+			? 'convert file' :
+			' unsupported file';
 };
-//decisionPoint('./storage/rar/Invoice.rar');
-processFile('./storage/rar/Invoice.rar', './storage/extracted/');
+
+//processFile('./storage/rar/Invoice.rar', './storage/extracted/');
 /*│    0    │ 'image/png' │ 'png' │ 'PNG image data' │ '1200 x 1200' │
 */
+
+const processDesicion = () => {
+	let files = [''];
+	files.map((file, index) => {
+	});
+	decisionPoint()
+};
