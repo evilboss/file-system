@@ -18,6 +18,7 @@ const supportedFileFormats = [
 	'pptx',
 	'docx',
 	'xlsx',
+	'tif',
 	'tiff',
 	'xml',
 	'gif',
@@ -28,6 +29,8 @@ const supportedFileFormats = [
 	'jpeg',
 	'psd'
 ];
+const supportedArchives = ['jar', 'zip', 'rar', '7z', 'tar', 'gz', 'eml', 'msg'];
+
 const renameFile = (currentPath, newPath) => {
 	fs.rename(currentPath, newPath, (err => console.error(err)));
 };
@@ -35,7 +38,6 @@ const makePath = (folderPath, filename) => {
 	return `${folderPath}${filename}`;
 };
 
-const supportedArchives = ['jar', 'zip', 'rar', '7z', 'tar', 'gz', 'eml', 'msg'];
 const verifyFiles = (target, outputDir) => {
 	listAll(target).then((result) => {
 		checkFiles(getOutputDir(target, outputDir))
@@ -182,7 +184,6 @@ const getFileInfo = (file) => {
 			} else if (result && fileInfo) {
 
 				const magicResult = result.split(',');
-				console.log(magicResult);
 
 				if (fileInfo.mime === 'application/x-msi') {
 					fileInfo.ext = (_.includes(result, 'Microsoft Office Word')) ? 'doc' : (_.includes(result, 'PowerPoint')) ?
@@ -216,6 +217,7 @@ const decisionPoint = (file) => {
 
 const isSupported = (fileInfo) => {
 	//console.log(fileInfo);
+	console.log(fileInfo);
 	return (_.includes(supportedArchives, fileInfo.ext)) ?
 		'extract file' :
 		(_.includes(supportedFileFormats, fileInfo.ext))
@@ -230,28 +232,28 @@ const isSupported = (fileInfo) => {
 
 const processDesicion = () => {
 	let files = [
-		/*'./testStorage/DATA_Ingestion/BMP.bmp',*/
-		'testStorage/DATA_Ingestion/DOC.doc',
-		/*'testStorage/DATA_Ingestion/DOCX.docx',
-		'testStorage/DATA_Ingestion/GIF.gif',
-		'testStorage/DATA_Ingestion/HTML.html',
-		'testStorage/DATA_Ingestion/JPEG.JPG',
-		'testStorage/DATA_Ingestion/ODP.odp',
-		'testStorage/DATA_Ingestion/ODS.ods',
-		'testStorage/DATA_Ingestion/PDF.pdf',
-		'testStorage/DATA_Ingestion/PNG.png',*/
-		'testStorage/DATA_Ingestion/PPT.ppt',
-		/*'testStorage/DATA_Ingestion/PPTX.pptx',
-		'testStorage/DATA_Ingestion/RTF.rtf',
-		'testStorage/DATA_Ingestion/text.psd',
-		'testStorage/DATA_Ingestion/TIFF.tiff',*/
-		'testStorage/DATA_Ingestion/XLS.xls',
-		/*		'testStorage/DATA_Ingestion/XLSX.xlsx',
-				'testStorage/DATA_Ingestion/XML.xml'*/
+		'././testStorage/DATA_Ingestion/BMP.bmp',
+		'./testStorage/DATA_Ingestion/DOC.doc',
+		'./testStorage/DATA_Ingestion/DOCX.docx',
+		'./testStorage/DATA_Ingestion/GIF.gif',
+		'./testStorage/DATA_Ingestion/HTML.html',
+		'./testStorage/DATA_Ingestion/JPEG.JPG',
+		'./testStorage/DATA_Ingestion/ODP.odp',
+		'./testStorage/DATA_Ingestion/ODS.ods',
+		'./testStorage/DATA_Ingestion/PDF.pdf',
+		'./testStorage/DATA_Ingestion/PNG.png',
+		'./testStorage/DATA_Ingestion/PPT.ppt',
+		'./testStorage/DATA_Ingestion/PPTX.pptx',
+		'./testStorage/DATA_Ingestion/RTF.rtf',
+		'./testStorage/DATA_Ingestion/text.psd',
+		'./testStorage/DATA_Ingestion/TIFF.tiff',
+		'./testStorage/DATA_Ingestion/XLS.xls',
+		'./testStorage/DATA_Ingestion/XLSX.xlsx',
+		'./testStorage/DATA_Ingestion/XML.xml'
 	];
 	files.map((file, index) => {
 		decisionPoint(file).then((result) => {
-			console.log(file, result);
+			console.log(result);
 		}).catch(err => {
 			console.error(err);
 		});

@@ -1,0 +1,35 @@
+{
+  "supportedFileFormats": [
+    "doc",
+    "ppt",
+    "xls",
+    "bmp",
+    "odt",
+    "odp",
+    "ods",
+    "rtf",
+    "pptx",
+    "docx",
+    "xlsx",
+    "tif",
+    "tiff",
+    "xml",
+    "gif",
+    "html",
+    "pdf",
+    "png",
+    "jpg",
+    "jpeg",
+    "psd"
+  ],
+  "supportedArchives": [
+    "jar",
+    "zip",
+    "rar",
+    "7z",
+    "tar",
+    "gz",
+    "eml",
+    "msg"
+  ]
+}
