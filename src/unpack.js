@@ -5,31 +5,7 @@ const mmm = require('mmmagic');
 const Magic = require('mmmagic').Magic;
 const readChunk = require('read-chunk');
 const fileType = require('file-type');
-
-const supportedFileFormats = [
-	'doc',
-	'ppt',
-	'xls',
-	'bmp',
-	'odt',
-	'odp',
-	'ods',
-	'rtf',
-	'pptx',
-	'docx',
-	'xlsx',
-	'tif',
-	'tiff',
-	'xml',
-	'gif',
-	'html',
-	'pdf',
-	'png',
-	'jpg',
-	'jpeg',
-	'psd'
-];
-const supportedArchives = ['jar', 'zip', 'rar', '7z', 'tar', 'gz', 'eml', 'msg'];
+const {supportedFileFormats, supportedArchives} = require('./supportedfiles.json');
 
 const renameFile = (currentPath, newPath) => {
 	fs.rename(currentPath, newPath, (err => console.error(err)));
@@ -214,10 +190,22 @@ const decisionPoint = (file) => {
 
 };
 
+const ensureAccountDirExists = (path, mask, cb) => {
+	if (typeof mask == 'function') { // allow the `mask` parameter to be optional
+		cb = mask;
+		mask = 777;
+	}
+	fs.mkdir(path, mask, err => {
+		if (err) if (err.code === 'EEXIST') cb(null); // ignore the error if the folder already exists
+		else cb(err); else cb(null); // something else went wrong
+		// successfully created folder
+	});
+
+};
+
 
 const isSupported = (fileInfo) => {
 	//console.log(fileInfo);
-	console.log(fileInfo);
 	return (_.includes(supportedArchives, fileInfo.ext)) ?
 		'extract file' :
 		(_.includes(supportedFileFormats, fileInfo.ext))
