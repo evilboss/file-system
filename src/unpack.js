@@ -190,16 +190,15 @@ const decisionPoint = (file) => {
 
 };
 
-const ensureAccountDirExists = (path, mask, cb) => {
-	if (typeof mask == 'function') { // allow the `mask` parameter to be optional
-		cb = mask;
-		mask = 777;
-	}
-	fs.mkdir(path, mask, err => {
-		if (err) if (err.code === 'EEXIST') cb(null); // ignore the error if the folder already exists
-		else cb(err); else cb(null); // something else went wrong
-		// successfully created folder
-	});
+const ensureAccountDirExists = (path, mask = 777) => {
+	return new Promise((resolve, reject) => {
+		fs.mkdir(path, mask, err => {
+			if (err) if (err.code === 'EEXIST') resolve('success'); // ignore the error if the folder already exists
+			else reject(err); else reject('Oops something whent wrong'); // something else went wrong
+			// successfully created folder
+		});
+	})
+
 
 };
 
