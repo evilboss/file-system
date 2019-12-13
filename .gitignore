@@ -72,5 +72,7 @@ yarn.lock
 .idea
 !/storage/tar/.gitkeep
 /storage/
-
+/aws.s3.config.json
+/aws.sqs.config.json
 /package-lock.json
+
