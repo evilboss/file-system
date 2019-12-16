@@ -14,11 +14,6 @@ const s3 = new AWS.S3({
 	secretAccessKey: secretAccessKey
 });
 
-
-const upload = () => {
-
-
-};
 const uploadFile = (targetFile, fileName) => {
 	// Read content from the file
 	const fileContent = fs.readFileSync(targetFile);
