@@ -1,3 +1,7 @@
+const uploadFile = (targetFile) => {
+// Call rename
+};
+
 const extractFile = () => {
 
 };
@@ -8,6 +12,12 @@ const decideFile = (target) => {
 	}))
 };
 
+const renameFile = (filename) => {
+
+};
+const convertFile = (filename) => {
+
+};
 const processFile = (target, accountName) => {
 
 };
