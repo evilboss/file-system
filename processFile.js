@@ -1,3 +1,13 @@
+const {supportedFileFormats, supportedArchives} = require('./supportedfiles.json');
+const fileOperations = {
+	extract: (file) => {
+
+	},
+	convert: {
+		jpg: () => {
+		},
+	}
+};
 const uploadFile = (targetFile) => {
 // Call rename
 };
