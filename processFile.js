@@ -4,8 +4,11 @@ const fileOperations = {
 
 	},
 	convert: {
+		pdf: () => {
+		},
 		jpg: () => {
 		},
+
 	}
 };
 const uploadFile = (targetFile) => {
