@@ -16,9 +16,11 @@ const readDirectory = () => {
         console.log(files);
     });
 };
+
 const renameFile = (currentPath, newPath) => {
     fs.rename(currentPath, newPath, (err => console.error(err)));
 };
+
 const makePath = (folderPath, filename) => {
     return `${folderPath}${filename}`;
 };
