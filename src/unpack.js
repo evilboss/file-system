@@ -249,4 +249,5 @@ const processDesicion = () => {
 
 const file = '', account = '';
 
-upnackAll('./storage/zip/ZIP.zip', './testStorage');
+
+export default {getFileInfo};
