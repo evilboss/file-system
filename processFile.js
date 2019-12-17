@@ -18,7 +18,9 @@ const uploadFile = (targetFile) => {
 };
 
 const extractFile = () => {
+	return new Promise((resolve, reject) => {
 
+	});
 };
 
 const decideFileProcess = (target) => {
@@ -38,10 +40,10 @@ const convertFile = (filename) => {
 const processFile = (target, accountName) => {
 	decideFileProcess(target)
 		.then((result) => {
-			result('bla');
+			result(target);
 		})
 		.catch((error) => {
 			console.error(error)
 		});
 };
-processFile('b;a', 'bla');
+processFile('file.jpg', 'bla');
