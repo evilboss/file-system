@@ -142,9 +142,7 @@
 
 		let cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
 		if (files) {
-			console.log('files not emplty');
 			cmd = cmd.toString().replace(/FILESPLACEHOLDER/g, escapeFileNameQuotes(files));
-			console.log(`FILESPLACEHOLDER!!!!!!!!!`,);
 		}
 		if (!options.quiet) log.info('cmd', cmd);
 		exec_unar(cmd, targetDir, callback);
