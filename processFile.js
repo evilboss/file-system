@@ -1,12 +1,14 @@
 const {supportedFileFormats, supportedArchives} = require('./supportedfiles.json');
 const fileOperations = {
 	extract: (file) => {
-
+		console.log('extract file', file)
 	},
 	convert: {
-		pdf: () => {
+		pdf: (file) => {
+			console.log('convert pdf', file)
 		},
-		jpg: () => {
+		jpg: (file) => {
+			console.log('convert jpg', file)
 		},
 
 	}
