@@ -75,4 +75,6 @@ yarn.lock
 /aws.s3.config.json
 /aws.sqs.config.json
 /package-lock.json
+!/testStorage/.gitkeep
+/testStorage/*
 
