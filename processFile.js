@@ -19,5 +19,11 @@ const convertFile = (filename) => {
 
 };
 const processFile = (target, accountName) => {
+	decideFileProcess(target)
+		.then((result) => {
 
+		})
+		.catch((error) => {
+			console.error(error)
+		});
 };
