@@ -13,6 +13,40 @@ const getFileType = (filePath) => {
 	const buffer = readChunk.sync(filePath, 0, fileType.minimumBytes);
 	return fileType(buffer);
 };
+const fileOperations = {
+	extract: (file) => {
+		return new Promise(((resolve, reject) => {
+			console.log('extract');
+			resolve(file);
+		}))
+	},
+	pdf: (file) => {
+		return new Promise(((resolve, reject) => {
+			console.log('pdf');
+			resolve(file);
+		}))
+	},
+	jpg: (file) => {
+		return new Promise(((resolve, reject) => {
+			console.log('jpg');
+			resolve(file);
+		}))
+	},
+
+
+};
+
+const getOperation = (ext) => {
+	return fileOperations[ext];
+};
+const isSupported = (ext) => {
+	//console.log(fileInfo);
+	return (_.includes(supportedArchives, ext)) ?
+		getOperation('extract') :
+		(_.includes(supportedFileFormats, ext))
+			? getOperation(ext) :
+			'unsupported file';
+};
 const getFileInfo = (file) => {
 
 	const magic = new Magic(mmm.MAGIC_NONE);
@@ -30,8 +64,6 @@ const getFileInfo = (file) => {
 				if (fileInfo.mime === 'application/x-msi') {
 					fileInfo.ext = (_.includes(result, 'Microsoft Office Word')) ? 'doc' : (_.includes(result, 'PowerPoint')) ?
 						'ppt' : (_.includes(result, 'Excel')) ? 'xls' : fileInfo.ext;
-
-
 				}
 				resolve({
 					mimeType: fileInfo.mime,
@@ -47,20 +79,8 @@ const getFileInfo = (file) => {
 
 
 };
-
-const fileOperations = {
-	extract: (file) => {
-		console.log('extract file', file)
-	},
-	convert: {
-		pdf: (file) => {
-			console.log('convert pdf', file)
-		},
-		jpg: (file) => {
-			console.log('convert jpg', file)
-		},
-
-	}
+const getFileExtension = (filename) => {
+	return filename.split('.').pop();
 };
 const uploadFile = (targetFile) => {
 // Call rename
@@ -74,11 +94,13 @@ const extractFile = () => {
 
 const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
-		resolve((param) => {
-			return new Promise((resolve1, reject1) => {
-				resolve1(param);
-			})
-		})
+		const operation = isSupported(getFileExtension(target));
+		if (operation !== 'unsupported file') {
+			resolve(operation);
+		} else {
+			reject('unsupported file');
+		}
+
 	}))
 };
 
@@ -97,4 +119,4 @@ const processFile = (target, accountName) => {
 			console.error(error)
 		});
 };
-processFile('file.jpg', 'bla');
+processFile('file.pdf', 'bla');
