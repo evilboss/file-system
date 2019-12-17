@@ -1,4 +1,4 @@
-const ua = require('./unar');
+const ua = require('./src/unar');
 const fs = require('fs');
 const _ = require('lodash');
 const mmm = require('mmmagic');
@@ -17,7 +17,6 @@ const getFileInfo = (file) => {
 
 	const magic = new Magic(mmm.MAGIC_NONE);
 	const fileInfo = getFileType(file);
-
 	return new Promise(((resolve, reject) => {
 		magic.detectFile(file, (err, result) => {
 			if (err) {
@@ -76,7 +75,9 @@ const extractFile = () => {
 const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
 		resolve((param) => {
-			console.log(param);
+			return new Promise((resolve1, reject1) => {
+				resolve1(param);
+			})
 		})
 	}))
 };
@@ -90,7 +91,7 @@ const convertFile = (filename) => {
 const processFile = (target, accountName) => {
 	decideFileProcess(target)
 		.then((result) => {
-			result(target);
+			result(target).then(result => console.log(result));
 		})
 		.catch((error) => {
 			console.error(error)
