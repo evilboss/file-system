@@ -1,22 +1,22 @@
-(function () {
+(() => {
 	'use strict';
 
 	// see http://unarchiver.c3.cx/commandline
 	// unar and lsar
-	var log = require('npmlog');
-	var path = require('path');
-	var exec = require('child_process').exec;
-	var os = require('os');
+	const log = require('npmlog');
+	const path = require('path');
+	const exec = require('child_process').exec;
+	const os = require('os');
 
 	// from http://github.com/substack/node-shell-quote, needed to remove more escaping
-	var map = require('array-map');
+	const map = require('array-map');
 
 	const quote = xs => map(xs, s => String(s).replace(/([#!"$&'(),;<=>?@\[\\\]^`{|}])/g, '\\$1')).join(' ');
 	//
 
 	module.exports = unpackAll.list = unpackAll;
 
-	var archiveTypePattern = /: [A-Z,7]*$/g;
+	const archiveTypePattern = /: [A-Z,7]*$/g;
 
 	const escapeFileName = s => {
 		return '"' + s + '"';
@@ -35,19 +35,15 @@
 		//return s;
 	};
 
-	var isInt = function isInt(x) {
-		return !isNaN(x) && eval(x).toString().length == parseInt(eval(x)).toString().length;
-	};
+	const isInt = x => !isNaN(x) && eval(x).toString().length === parseInt(eval(x)).toString().length;
 
 
-	unpackAll.defaultListFilter = function defaultListFilter(s) {
-		return s && s != ''
-			&& s.indexOf('\r') == -1
-			&& s.indexOf('\n') == -1
-			&& !s.match(archiveTypePattern);
-	};
+	unpackAll.defaultListFilter = s => s && s != ''
+		&& s.indexOf('\r') === -1
+		&& s.indexOf('\n') === -1
+		&& !s.match(archiveTypePattern);
 
-	function exec_unar(runcmd, extractDir, docallback) {
+	const exec_unar = (runcmd, extractDir, docallback) => {
 		exec(runcmd, function (err, stdout, stderr) {
 			if (err) return docallback(Error(err), null);
 			if (stderr && stderr.length > 0) return docallback(Error('Error: ' + stderr), null);
@@ -56,18 +52,18 @@
 			}
 			return docallback(null, extractDir, stdout);
 		});
-	}
+	};
 
-	unpackAll.unpack = function unpack(archiveFile, options, callback) {
+	unpackAll.unpack = (archiveFile, options, callback) => {
 		if (!callback) return new Error('No callback function');
 		if (!archiveFile) archiveFile = options.archiveFile;
 		if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
 		if (!options) options = {};
 
 		// Unar command:
-		var unar = options.unar;
+		let unar = options.unar;
 		if (!unar) unar = (process.platform !== "linux") ? path.join(__dirname, 'unar') : 'unar';
-		var ar = [unar];
+		const ar = [unar];
 		let files = [];
 		// Archive file (source):
 		ar.push('SOURCEFILE');
@@ -75,7 +71,7 @@
 
 		// -output-directory (-o) <string>: The directory to write the contents of the archive to. Defaults to the current directory.
 		ar.push('-o');
-		var targetDir = options.targetDir;
+		let targetDir = options.targetDir;
 		if (!targetDir) targetDir = path.join(os.tmpdir(), 'tmp');
 		ar.push(targetDir);
 
@@ -144,7 +140,7 @@
 		}
 		if (!options.quiet) log.info('command', quote(ar));
 
-		var cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
+		let cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
 		if (files) {
 			console.log('files not emplty');
 			cmd = cmd.toString().replace(/FILESPLACEHOLDER/g, escapeFileNameQuotes(files));
@@ -154,14 +150,14 @@
 		exec_unar(cmd, targetDir, callback);
 	}; // unpackAll.unpack
 
-	unpackAll.unpackonly = function unpackonly(archiveFile, unpackDir, unpackOnly, callback) {
+	unpackAll.unpackonly = (archiveFile, unpackDir, unpackOnly, callback) => {
 		if (!callback) return new Error('No callback function');
 		if (!archiveFile) return callback(Error("Error: archiveFile missing."), null);
 		if (!unpackDir) return callback(Error("Error: target Directory missing."), null);
 		if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
 
 		// Unar command:
-		var unar = (process.platform != "linux") ? path.join(__dirname, 'unar') : 'unar';
+		var unar = (process.platform !== "linux") ? path.join(__dirname, 'unar') : 'unar';
 		var ar = [unar];
 
 		// Archive file (source):
@@ -183,7 +179,7 @@
 
 		if (unpackOnly) {
 			if (Array.isArray(unpackOnly)) {
-				unpackOnly.forEach(function (s) {
+				unpackOnly.forEach(s => {
 					ar.push(s);
 				});
 			} else {
@@ -193,12 +189,12 @@
 
 		log.info('command', quote(ar));
 
-		var cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
+		const cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
 		log.info('cmd', cmd);
 		exec_unar(cmd, unpackDir, callback);
 	}; // unpackAll.unpackonly
 
-	unpackAll.list = function list(archiveFile, options, callback) {
+	unpackAll.list = (archiveFile, options, callback) => {
 		if (!callback) return new Error('No callback function');
 		if (!archiveFile) archiveFile = options.archiveFile;
 		if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
@@ -207,7 +203,7 @@
 
 		// Usar command:
 		var lsar = options.lsar;
-		if (!lsar) lsar = (process.platform != "linux") ? path.join(__dirname, 'lsar') : 'lsar';
+		if (!lsar) lsar = (process.platform !== "linux") ? path.join(__dirname, 'lsar') : 'lsar';
 		var ar = [lsar];
 
 		// Archive file (source):
@@ -245,15 +241,15 @@
 		// -json-ascii (-ja): Print the listing in JSON format, encoded as pure ASCII text.
 		if (options.jsonAscii) ar.push('-ja');
 
-		var cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
+		const cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
 		if (!options.quiet) log.info('cmd', cmd);
-		exec(cmd, function (err, stdout, stderr) {
+		exec(cmd, (err, stdout, stderr) => {
 			if (err) return callback(Error(err), null);
 			if (stderr && stderr.length > 0) return callback(Error('Error: ' + stderr), null);
 
-			var lines = stdout.split(/(\r?\n)/g);
+			const lines = stdout.split(/(\r?\n)/g);
 			if (lines.length > 0) {
-				var files = lines.filter(unpackAll.defaultListFilter);
+				const files = lines.filter(unpackAll.defaultListFilter);
 				return callback(null, files);
 
 			} else {
