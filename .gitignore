@@ -67,7 +67,6 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
-
 yarn.lock
 .idea
 !/storage/tar/.gitkeep
