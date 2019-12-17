@@ -6,7 +6,7 @@ const extractFile = () => {
 
 };
 
-const decideFile = (target) => {
+const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
 
 	}))
