@@ -246,7 +246,7 @@ const processDesicion = () => {
 		});
 	});
 };
-processDesicion();
 
-const file ='',account='';
+const file = '', account = '';
 
+upnackAll('./storage/zip/ZIP.zip', './testStorage');
