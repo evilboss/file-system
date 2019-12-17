@@ -248,6 +248,3 @@ const processDesicion = () => {
 };
 
 const file = '', account = '';
-
-
-export default {getFileInfo};
