@@ -11,7 +11,6 @@ enterPath = fs.readFileSync('./testStorage/DATA_Ingestion/XML.xml');
 // Convert it to pdf format with undefined filter (see Libreoffice doc about filter)
 libre.convert(enterPath, extend, undefined, (err, done) => {
 	if (err) {
-
 		console.log(`Error converting file: ${err}`);
 	} else {
 		fs.writeFileSync(`./testStorage/converted/doc${extend}`, done);
