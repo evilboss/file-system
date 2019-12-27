@@ -1,0 +1,4 @@
+# YAML for adding args using the JSON patch RFC 6902 format
+# Note that since args have no anchor, there's no way to update an arg, only add one at the end of the array
+# This file can contain multiple entries
+# For each entry add an array item (starting with -) with 3 parts - op: add, path: /spec/template/spec/containers/<num>/args/-, value: <the arg>
