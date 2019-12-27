@@ -1,0 +1,21 @@
+# Base deployment resource for musical-spoon service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musical-spoon
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: 'CHANGE_CAUSE'
+    spec:
+
+      containers:
+        - name: musical-spoon
+          ports:
+            - containerPort: 3000
