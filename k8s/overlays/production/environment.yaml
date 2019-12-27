@@ -1,0 +1,13 @@
+# YAML for adding/replacing environment variables
+# This is an example of adding/replacing objects in an array of objects
+# The objects are located in the array by an undocumented kustomize feature that locates them by a certain key value
+# In this case the key value is the name of the env var and it must be the first item in each object
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musical-spoon
+spec:
+  template:
+    spec:
+      containers:
+        - name: musical-spoon
