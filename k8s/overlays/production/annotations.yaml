@@ -1,0 +1,6 @@
+# YAML for adding/replacing annotations
+# As an element that has a clear path, it''s very easy to add an annotation or replace one
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musical-spoon
