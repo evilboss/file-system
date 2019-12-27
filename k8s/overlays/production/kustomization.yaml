@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  env: production
+bases:
+  - ../../base
+# Additional resources, such as a configmap (uncomment the following if necessary and add resources)
+resources:
+  - configmap.yaml
+  - autoscaling.yaml
+# Patches for elements that have a clear and consistent path to them
+patches:
+  - annotations.yaml
+  - environment.yaml
+  - image.yaml
+  - scaling.yaml
+# Patches using RFC 6902 format in order to add elements to arrays that contain strings
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1beta2
+      kind: Deployment
+      name: musical-spoon
+    path: args.yaml
