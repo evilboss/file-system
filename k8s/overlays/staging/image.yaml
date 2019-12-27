@@ -1,0 +1,12 @@
+# YAML for setting the image in STAG
+# Placed in a patch in order to allow different images for production and staging
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: musical-spoon
+spec:
+  template:
+    spec:
+      containers:
+        - name: musical-spoon
+          image: 'IMAGE_NAME'
