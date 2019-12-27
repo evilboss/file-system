@@ -1,0 +1,86 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/musical-spoon
+    docker:
+      - image: circleci/node:12.13.0
+
+    branches:
+      only:
+        - master
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: musical-spoon-{{ checksum "package.json" }}
+
+      - run:
+          name: npm install
+          command: |
+            NEW_PACKAGE_VERSION=$(node change-ver.js ${CIRCLE_BUILD_NUM}) ; npm --no-git-tag-version version $NEW_PACKAGE_VERSION
+            npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: musical-spoon-{{ checksum "package.json" }}
+
+      - setup_remote_docker
+
+      - run:
+          name: Install awscli
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y -qq python3 python3-pip libpython3-dev python3-dev
+            sudo pip3 install --upgrade awscli
+            sudo ln -s /usr/local/bin/aws /usr/bin/aws
+
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/linux/amd64/kubectl
+            chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/kubectl
+
+      - run:
+          name: install libreoffice
+          command: |
+            sudo apt-get --no-install-recommends install libreoffice
+
+      - run:
+          name: install unar
+          command: |
+            sudo apt-get install unar
+
+      - run:
+          name: Docker publish
+          command: |
+            # Generate the image name
+            IMAGE_NAME=${AWS_REG_URL}/musicalspoon:$(node change-ver.js ${CIRCLE_BUILD_NUM} ${CIRCLE_BRANCH}) # Generate the change cause (for rollout history)
+            CHANGE_CAUSE="Build: "${CIRCLE_BUILD_NUM}"; Branch: "${CIRCLE_BRANCH}
+            # Print the image name for reference
+            echo 'Image: '${IMAGE_NAME}
+            # Build the image
+            echo 'Building the image'
+            docker build -t ${IMAGE_NAME} .
+            # Login to AWS container registry (ECR)
+            eval $(aws ecr get-login --no-include-email)
+            # Push the image to ECR
+            echo 'Pushing image to ECR'
+            docker push ${IMAGE_NAME}
+            # Replace the image placeholder in the k8s specs to the correct image name
+            sed --in-place 's+IMAGE_NAME+'"${IMAGE_NAME}"'+g' ./k8s/overlays/staging/image.yaml
+            sed --in-place 's+IMAGE_NAME+'"${IMAGE_NAME}"'+g' ./k8s/overlays/production/image.yaml
+            # Replace the CHANGE_CAUSE placeholder in the deployment so that it will be available in rollout history
+            sed --in-place 's+CHANGE_CAUSE+'"${CHANGE_CAUSE}"'+g' ./k8s/base/deployment.yaml
+            # Make a place to store the build artifacts (in this case - k8s resources for the various environments)
+            mkdir ./artifacts
+            # Use kustomize to generate a single resouce spec for each environment
+            echo 'Generating k8s resources'
+            kubectl kustomize ./k8s/overlays/staging/ > ./artifacts/staging.yaml
+            kubectl kustomize ./k8s/overlays/production/ > ./artifacts/production.yaml
+
+      - store_artifacts: # A special step that tells CircleCI which output files or directories have to be stored in the artifacts (accesible from artifacts tab)
+          path: ./artifacts
+
