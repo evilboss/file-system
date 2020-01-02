@@ -10,6 +10,7 @@ const {supportedFileFormats, supportedArchives} = require('./supportedfiles.json
 const renameFile = (currentPath, newPath) => {
 	fs.rename(currentPath, newPath, (err => console.error(err)));
 };
+
 const makePath = (folderPath, filename) => {
 	return `${folderPath}${filename}`;
 };
@@ -29,6 +30,7 @@ const verifyFiles = (target, outputDir) => {
 			});
 	});
 };
+
 const checkFiles = (target) => {
 	return new Promise(((resolve, reject) => {
 		fs.readdir(target, (err, files) => {
