@@ -1,4 +1,4 @@
-const ua = require('./src/unar');
+const ua = require('./unar');
 const fs = require('fs');
 const _ = require('lodash');
 const mmm = require('mmmagic');

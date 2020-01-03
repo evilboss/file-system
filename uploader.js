@@ -17,7 +17,6 @@ const s3 = new AWS.S3({
 const uploadFile = (targetFile, fileName) => {
 	// Read content from the file
 	const fileContent = fs.readFileSync(targetFile);
-
 	// Setting up S3 upload parameters
 	const params = {
 		Bucket: 'testbucketingestion',
