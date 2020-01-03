@@ -28,7 +28,6 @@
 	const escapeFileNameQuotes = s => {
 		let result = '';
 		s.forEach((file) => result = result + "'" + file + "' ");
-		console.log(result);
 		return result;
 		//if (isWindows()) return '"'+s+'"';
 		//// '"'+cmd.replace(/(["\s'$`\\])/g,'\\$1')+'"'
@@ -184,11 +183,10 @@
 				ar.push(unpackOnly);
 			}
 		}
-
-		log.info('command', quote(ar));
+		if (!options.quiet) log.info('command', quote(ar));
 
 		const cmd = quote(ar).replace('SOURCEFILE', escapeFileName(archiveFile));
-		log.info('cmd', cmd);
+		if (!options.quiet) log.info('cmd', cmd);
 		exec_unar(cmd, unpackDir, callback);
 	}; // unpackAll.unpackonly
 

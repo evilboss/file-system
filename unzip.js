@@ -1,3 +1,4 @@
+const fs = require('fs');
 const onezip = require('onezip');
 const path = require('path');
 const cwd = process.cwd();
@@ -40,23 +41,17 @@ const zip = () => {
 };
 const unzip = () => {
 	return new Promise((resolve, reject) => {
-		const extract = onezip.extract(path.join(cwd, '/storage/zip/pipe-io/toCompress.zip'), path.join(cwd, '/storage/zip/pipe-io/extract'));
+		const extract = onezip.extract('./storage/zip/pipe-io/toCompress.zip', './storage/zip/pipe-io/extract');
 		extract.on('file', (name) => {
 			console.log(name);
-		});
+			fs.unlink(`./storage/zip/pipe-io/extract/${name}`, (err) => {
+				if (err) {
+					console.error(err);
+					return;
+				}
 
-		extract.on('start', (percent) => {
-			// set status to
-			console.log('extracting started');
-		});
-
-		extract.on('progress', (percent) => {
-			console.log(percent + '%');
-		});
-
-		extract.on('error', (error) => {
-			console.error(error);
-			reject(error);
+				//file removed
+			})
 		});
 
 		extract.on('end', () => {
@@ -66,8 +61,12 @@ const unzip = () => {
 	})
 
 };
+/*
+zip usage
 zip()
 	.then((result) => unzip().then().catch())
 	.catch((err) => {
 		console.error(err)
 	});
+*/
+unzip();
