@@ -13,13 +13,13 @@ const isDefaultFormats = (ext) => {
 	return (_.includes(defaultFormats, ext))
 };
 const isSupportedFileFormats = (ext) => {
+	console.log('here', ext, _.includes(supportedFileFormats, ext));
 	return _.includes(supportedFileFormats, ext);
 };
 const isSupportedArchive = (ext) => {
 	return (_.includes(supportedArchives, ext));
 };
 const isSupported = (ext) => {
-	console.log(getOperation('extract'));
 	/*TODO: return don't convert if files are [jpg, psd,png,pdf]*/
 	return (isSupportedArchive(ext)) ?
 		getOperation('extract') :

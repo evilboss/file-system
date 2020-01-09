@@ -117,6 +117,9 @@ const processFile = (target, accountName) => {
 		})
 		.catch((error) => {
 			console.error(error)
-		});
+		}).finally(() => {
+		console.log(accountName);
+	});
+
 };
 processFile('file.pdf', 'bla');

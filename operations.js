@@ -19,6 +19,11 @@ const fileOperations = {
 			resolve(file);
 		}))
 	},
+	convert: () => {
+		return new Promise(((resolve, reject) => {
+			resolve('convert');
+		}))
+	}
 };
 
 const getOperation = (ext) => {
