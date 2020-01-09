@@ -27,4 +27,10 @@ const process = (file, account) => {
 	});
 };
 
-process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
+/*
+*
+*  usage
+*  process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
+*
+* */
+
