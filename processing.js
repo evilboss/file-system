@@ -12,7 +12,19 @@ const decideFileProcess = (target) => {
 		} else {
 			reject('unsupported file');
 		}
-
 	}))
 };
-decideFileProcess('./testStorage/DATA_Ingestion/DOC.doc');
+const process = (file, account) => {
+	decideFileProcess(file).then(operation => {
+		operation(file).then((result) => {
+			console.log(result);
+		}).catch(err => {
+			console.error(err)
+		});
+
+	}).catch(error => {
+		console.error(error)
+	});
+};
+
+process('./testStorage/DATA_Ingestion/DOC.doc');

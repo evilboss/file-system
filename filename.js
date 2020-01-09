@@ -19,6 +19,7 @@ const isSupportedArchive = (ext) => {
 	return (_.includes(supportedArchives, ext));
 };
 const isSupported = (ext) => {
+	console.log(getOperation('extract'));
 	/*TODO: return don't convert if files are [jpg, psd,png,pdf]*/
 	return (isSupportedArchive(ext)) ?
 		getOperation('extract') :

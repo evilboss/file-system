@@ -19,11 +19,9 @@ const fileOperations = {
 			resolve(file);
 		}))
 	},
-
-
 };
 
 const getOperation = (ext) => {
 	return fileOperations[ext];
 };
-module.exports = {getOperation}
+module.exports = {getOperation};
