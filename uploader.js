@@ -14,12 +14,12 @@ const s3 = new AWS.S3({
 	secretAccessKey: secretAccessKey
 });
 
-const uploadFile = (targetFile, fileName) => {
+const uploadFile = (targetFile, fileName, buketName = 'testbucketingestion') => {
 	// Read content from the file
 	const fileContent = fs.readFileSync(targetFile);
 	// Setting up S3 upload parameters
 	const params = {
-		Bucket: 'testbucketingestion',
+		Bucket: buketName,
 		Key: fileName, // File name you want to save as in S3
 		Body: fileContent
 	};
@@ -32,4 +32,7 @@ const uploadFile = (targetFile, fileName) => {
 		console.log(`File uploaded successfully. ${data.Location}`);
 	});
 };
-uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
+//usage
+/*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
+*/
+module.exports = {uploadFile};
