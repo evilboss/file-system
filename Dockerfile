@@ -8,7 +8,7 @@ WORKDIR /musical-spoon
 COPY package*.json /musical-spoon/
 
 # install deps
-RUN apt update && apt upgrade -y && apt install libreoffice --no-install-recommends -y  && apt install unar -y
+RUN apt update && apt upgrade -y && apt install libreoffice --no-install-recommends unar openjdk-8-jdk tree -y && apt clean
 
 # install pm2
 RUN npm install pm2 -g
