@@ -13,7 +13,6 @@ const isDefaultFormats = (ext) => {
 	return (_.includes(defaultFormats, ext))
 };
 const isSupportedFileFormats = (ext) => {
-	console.log('here', ext, _.includes(supportedFileFormats, ext));
 	return _.includes(supportedFileFormats, ext);
 };
 const isSupportedArchive = (ext) => {

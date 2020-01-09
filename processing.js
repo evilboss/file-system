@@ -7,7 +7,6 @@ const {getFilename, getFileExtension, isSupported} = require('./filename');
 const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
 		const operation = isSupported(getFileExtension(target));
-		console.log(operation);
 		if (operation !== 'unsupported file') {
 			resolve(operation);
 		} else {
