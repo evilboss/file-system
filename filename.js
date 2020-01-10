@@ -10,16 +10,17 @@ const getFilename = (filename) => {
 const isDefaultFormats = (ext) => {
 	const defaultFormats = ['jpg', 'psd', 'png', 'pdf'];
 
-	return (_.includes(defaultFormats, ext))
+	return (_.includes(defaultFormats, ext.toLowerCase()))
 };
 const isSupportedFileFormats = (ext) => {
-	return _.includes(supportedFileFormats, ext);
+	return _.includes(supportedFileFormats, ext.toLowerCase());
 };
 const isSupportedArchive = (ext) => {
-	return (_.includes(supportedArchives, ext));
+	return (_.includes(supportedArchives, ext.toLowerCase()));
 };
 const isSupported = (ext) => {
 	/*TODO: return don't convert if files are [jpg, psd,png,pdf]*/
+	console.log(ext);
 	return (isSupportedArchive(ext)) ?
 		getOperation('extract') :
 		(isSupportedFileFormats(ext)) ?
