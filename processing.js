@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const {uploadFile} = require('./uploader');
-const {getFilename, getFileExtension, isSupported} = require('./filename');
+const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
 
 const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
@@ -13,10 +13,12 @@ const decideFileProcess = (target) => {
 	}))
 };
 const process = (file, account) => {
-	decideFileProcess(file).then(processResult => {
-		processResult(file).then((operation) => {
-			operation(file);
-			console.log(operation(file));
+	decideFileProcess(file).then(operation => {
+		operation(file).then((payload) => {
+			if (payload.filename) {
+
+				uploadFile(payload.filename, renameFile(payload.filename, account))
+			}
 		}).catch(err => {
 			console.error(err)
 		});

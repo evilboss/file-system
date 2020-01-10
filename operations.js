@@ -16,16 +16,16 @@ const fileOperations = {
 		}));
 	},
 	dontConvert: (file) => {
-		console.log('dont convert');
-		return Promise.resolve(
-			() => {
-				console.log(file)
+		return new Promise(
+			(resolve) => {
+				resolve({filename: file});
 			})
 	},
 	unsupported: (file) => {
-		console.log('unsupported');
-		return 'unsupported';
-
+		return new Promise(
+			(resolve) => {
+				resolve({filename: ''});
+			})
 	}
 
 };

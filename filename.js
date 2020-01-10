@@ -5,8 +5,18 @@ const getFileExtension = (filename) => {
 	return filename.split('.').pop();
 };
 const getFilename = (filename) => {
-	return filename.split('.').slice(0, -1).join('.');
+	return filename.split('.').slice(0, -1).join('.').replace('./testStorage', '').replace('./storage', '');
+
 };
+
+const generatefileName = (file, accountName) => {
+	return `${accountName}/${file.replace(/\//g, '_').replace(/ /g, '').trim()}`;
+
+};
+const renameFile = (file, account) => {
+	return (`${generatefileName(getFilename(file), account)}.${getFileExtension(file)}`);
+};
+
 const isDefaultFormats = (ext) => {
 	const defaultFormats = ['jpg', 'psd', 'png', 'pdf'];
 
@@ -20,7 +30,6 @@ const isSupportedArchive = (ext) => {
 };
 const isSupported = (ext) => {
 	/*TODO: return don't convert if files are [jpg, psd,png,pdf]*/
-	console.log(ext);
 	return (isSupportedArchive(ext)) ?
 		getOperation('extract') :
 		(isSupportedFileFormats(ext)) ?
@@ -30,4 +39,4 @@ const isSupported = (ext) => {
 			getOperation('unsupported');
 };
 
-module.exports = {getFilename, getFileExtension, isSupported};
+module.exports = {getFilename, getFileExtension, isSupported, generatefileName, renameFile};
