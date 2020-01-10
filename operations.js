@@ -12,8 +12,10 @@ const fileOperations = {
 
 	convert: () => {
 		return new Promise(((resolve, reject) => {
-			resolve(convert
+			resolve(convert);
+		}))
 	}
+
 };
 
 const getOperation = (ext) => {
