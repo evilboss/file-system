@@ -21,12 +21,10 @@ const process = (file, account) => {
 		}).catch(err => {
 			console.error(err)
 		});
-
 	}).catch(error => {
 		console.error(error)
 	});
 };
-
 /*
 *  USAGE:
 *  process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
