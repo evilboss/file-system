@@ -16,6 +16,10 @@ const s3 = new AWS.S3({
 
 const uploadFile = (targetFile, fileName, buketName = 'testbucketingestion') => {
 	// Read content from the file
+	if (!targetFile && !fileName) {
+		console.error('targetFile and targetfilename required to upload file');
+		return 'targetFile and fileName required to upload file';
+	}
 	const fileContent = fs.readFileSync(targetFile);
 	// Setting up S3 upload parameters
 	const params = {

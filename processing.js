@@ -1,5 +1,5 @@
 const _ = require('lodash');
-
+const {uploadFile} = require('./uploader');
 const {getFilename, getFileExtension, isSupported} = require('./filename');
 
 const decideFileProcess = (target) => {
@@ -33,3 +33,4 @@ const process = (file, account) => {
 * */
 
 process('./testStorage/DATA_Ingestion/JPEG.JPG', "JLU");
+uploadFile();
