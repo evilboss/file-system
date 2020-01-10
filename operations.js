@@ -7,13 +7,13 @@ const fileOperations = {
 		return new Promise(((resolve, reject) => {
 			console.log('extract');
 			resolve(unpackOne);
-		}))
+		}));
 	},
 
 	convert: () => {
 		return new Promise(((resolve, reject) => {
 			resolve(convert);
-		}))
+		}));
 	}
 
 };
