@@ -16,8 +16,7 @@ const process = (file, account) => {
 	decideFileProcess(file).then(operation => {
 		operation(file).then((payload) => {
 			if (payload.filename) {
-
-				uploadFile(payload.filename, renameFile(payload.filename, account))
+				uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
 			}
 		}).catch(err => {
 			console.error(err)

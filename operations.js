@@ -18,13 +18,13 @@ const fileOperations = {
 	dontConvert: (file) => {
 		return new Promise(
 			(resolve) => {
-				resolve({filename: file});
+				resolve({filename: file, bucket: 'ingestion-ph-dev-main'});
 			})
 	},
 	unsupported: (file) => {
 		return new Promise(
 			(resolve) => {
-				resolve({filename: ''});
+				resolve({filename: '', bucket: ''});
 			})
 	}
 
