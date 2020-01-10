@@ -9,7 +9,6 @@ const fileOperations = {
 			resolve(unpackOne);
 		}));
 	},
-
 	convert: (file) => {
 		return new Promise(((resolve, reject) => {
 			conversion(file).then(result => {
