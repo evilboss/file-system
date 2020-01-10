@@ -14,7 +14,7 @@ const s3 = new AWS.S3({
 	secretAccessKey: secretAccessKey
 });
 
-const uploadFile = (targetFile, fileName, buketName = 'testbucketingestion') => {
+const uploadFile = (targetFile, fileName, buketName = 'ingestion-ph-dev-secondary') => {
 	// Read content from the file
 	if (!targetFile && !fileName) {
 		console.error('targetFile and targetfilename required to upload file');

@@ -13,9 +13,10 @@ const decideFileProcess = (target) => {
 	}))
 };
 const process = (file, account) => {
-	decideFileProcess(file).then(operation => {
-		operation(file).then((result) => {
-			console.log(result);
+	decideFileProcess(file).then(processResult => {
+		processResult(file).then((operation) => {
+			operation(file);
+			console.log(operation(file));
 		}).catch(err => {
 			console.error(err)
 		});
@@ -33,4 +34,3 @@ const process = (file, account) => {
 * */
 
 process('./testStorage/DATA_Ingestion/JPEG.JPG', "JLU");
-uploadFile();

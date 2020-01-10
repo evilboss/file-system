@@ -19,15 +19,13 @@ const fileOperations = {
 		console.log('dont convert');
 		return Promise.resolve(
 			() => {
-			console.log(file)
-		})
+				console.log(file)
+			})
 	},
 	unsupported: (file) => {
 		console.log('unsupported');
-		return Promise.resolve(
-			() => {
-				console.log(file)
-			})
+		return 'unsupported';
+
 	}
 
 };
