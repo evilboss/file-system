@@ -1,7 +1,5 @@
 const _ = require('lodash');
 
-const {listAll, unpackOne} = require('./extraction');
-const {convert} = require('./conversion');
 const {getFilename, getFileExtension, isSupported} = require('./filename');
 
 const decideFileProcess = (target) => {

@@ -1,28 +1,18 @@
 const _ = require('lodash');
+const {listAll, unpackOne} = require('./extraction');
+const {convert} = require('./conversion');
 
 const fileOperations = {
 	extract: (file) => {
 		return new Promise(((resolve, reject) => {
 			console.log('extract');
-			resolve(file);
+			resolve(unpackOne);
 		}))
 	},
-	pdf: (file) => {
-		return new Promise(((resolve, reject) => {
-			console.log('pdf');
-			resolve(file);
-		}))
-	},
-	jpg: (file) => {
-		return new Promise(((resolve, reject) => {
-			console.log('jpg');
-			resolve(file);
-		}))
-	},
+
 	convert: () => {
 		return new Promise(((resolve, reject) => {
-			resolve('convert');
-		}))
+			resolve(convert
 	}
 };
 
