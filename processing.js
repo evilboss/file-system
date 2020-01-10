@@ -34,4 +34,4 @@ const process = (file, account) => {
 *
 * */
 
-process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
+process('./testStorage/DATA_Ingestion/BMP.bmp', "JLU");
