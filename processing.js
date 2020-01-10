@@ -28,8 +28,7 @@ const process = (file, account) => {
 };
 
 /*
-*
-*  usage
+*  USAGE:
 *  process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
