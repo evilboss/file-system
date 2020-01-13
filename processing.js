@@ -15,8 +15,11 @@ const decideFileProcess = (target) => {
 const process = (file, account) => {
 	decideFileProcess(file).then(operation => {
 		operation(file).then((payload) => {
-			if (payload.filename) {
+			console.log(payload);
+			if (payload && payload.filename) {
 				uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
+			} else {
+
 			}
 		}).catch(err => {
 			console.error(err)
@@ -31,4 +34,4 @@ const process = (file, account) => {
 *
 * */
 
-process('./testStorage/DATA_Ingestion/RTF.rtf', "JLU");
+process('./storage/zip/zip.zip', "JLU");
