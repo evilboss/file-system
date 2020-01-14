@@ -41,4 +41,11 @@ const isSupported = (ext) => {
 			getOperation('unsupported');
 };
 
-module.exports = {getFilename, getFileExtension, isSupported, generatefileName, renameFile, getFile};
+module.exports = {
+	getFilename,
+	getFileExtension,
+	isSupported,
+	generatefileName,
+	renameFile,
+	getFile
+};

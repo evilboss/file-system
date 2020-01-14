@@ -1,5 +1,8 @@
 const _ = require('lodash');
 const ua = require('./unar');
+const {uploadFile} = require('./uploader');
+
+const outputdir = './storage/extract/';
 const listAll = (target) => {
 	return new Promise((resolve, reject) => {
 		ua.list(target, {quiet: true}, (error, files) => {
@@ -11,6 +14,7 @@ const listAll = (target) => {
 const unpackOne = (target, output, file) => {
 	return new Promise((resolve, reject) => {
 		ua.unpack(target, {
+			archiveFile: target,
 			targetDir: output,
 			files: file,
 			quiet: true,
@@ -18,18 +22,41 @@ const unpackOne = (target, output, file) => {
 
 		}, (err, files, info) => {
 			if (err) {
+				console.error(err);
 				reject(err)
 			} else {
 				//Upload file
-				console.log(`${output}${file}`);
 				resolve(`${output}${file}`);
 			}
 
 		});
+
 	});
 };
 
-module.export = {
-	unpackOne: unpackOne(),
-	listAll,
+const extractFiles = (file, account) => {
+	const {getFileExtension, renameFile} = require('./filename');
+
+	listAll(file).then((result => {
+		_.each(result, (item, key) => {
+			if (!getFileExtension(item).includes('/')) {
+				unpackOne(file, outputdir, item).then((payload) => {
+					uploadFile(payload, renameFile(payload, account));
+				}).then(result => {
+					console.log('result:', result);
+				}).catch(err => console.error(err));
+			}
+
+		})
+
+	})).catch(error => console.error(error)).finally(() => {
+		return new Promise((resolve, reject) => {
+			resolve('ok');
+
+		})
+	})
+	;
+};
+module.exports = {
+	extractFiles
 };

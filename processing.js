@@ -13,8 +13,9 @@ const decideFileProcess = (target) => {
 	}))
 };
 const process = (file, account) => {
+
 	decideFileProcess(file).then(operation => {
-		operation(file).then((payload) => {
+		operation(file, account).then((payload) => {
 			console.log(payload);
 			if (payload && payload.filename) {
 				uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
@@ -35,4 +36,4 @@ const process = (file, account) => {
 *
 * */
 
-process('./storage/zip/zip.zip', "JLU");
+process('./storage/zip/ZIP.zip', "JLU");

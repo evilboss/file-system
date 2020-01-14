@@ -1,15 +1,13 @@
 const _ = require('lodash');
-const {listAll, unpackOne} = require('./extraction');
 const {conversion} = require('./conversion');
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
+const {extractFiles} = require('./extraction');
 
 const fileOperations = {
-	extract: (file) => {
+	extract: (file, accountName) => {
 		return new Promise(((resolve, reject) => {
-			const {unpackOne} = require('./extraction');
-			console.log(file);
-			unpackOne(file);
-			resolve(unpackOne);
+			extractFiles(file, accountName);
+			resolve('ok');
 		}));
 	},
 	convert: (file) => {
