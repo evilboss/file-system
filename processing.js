@@ -19,8 +19,6 @@ const process = (file, account) => {
 			console.log(payload);
 			if (payload && payload.filename) {
 				uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
-			} else {
-
 			}
 		}).catch(err => {
 			console.error(err)
