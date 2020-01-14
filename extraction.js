@@ -17,12 +17,19 @@ const unpackOne = (target, output, file) => {
 			forceOverwrite: true,
 
 		}, (err, files, info) => {
-			(err) ? reject(err) : resolve(`${output}${file}`);
+			if (err) {
+				reject(err)
+			} else {
+				//Upload file
+				console.log(`${output}${file}`);
+				resolve(`${output}${file}`);
+			}
+
 		});
 	});
 };
 
 module.export = {
-	unpackOne,
+	unpackOne: unpackOne(),
 	listAll,
 };

@@ -6,6 +6,9 @@ const {getFilename, getFileExtension, isSupported, generatefileName, renameFile}
 const fileOperations = {
 	extract: (file) => {
 		return new Promise(((resolve, reject) => {
+			const {unpackOne} = require('./extraction');
+			console.log(file);
+			unpackOne(file);
 			resolve(unpackOne);
 		}));
 	},

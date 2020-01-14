@@ -32,8 +32,15 @@ const uploadFile = (targetFile, fileName, buketName = 'ingestion-ph-dev-secondar
 	s3.upload(params, (err, data) => {
 		if (err) {
 			throw err;
+		} else {
+			fs.unlink(targetFile, err => {
+				if (err) throw err;
+				// if no error, file has been deleted successfully
+				console.log('File deleted!');
+			});
+			console.log(`File uploaded successfully. ${data.Location}`);
 		}
-		console.log(`File uploaded successfully. ${data.Location}`);
+
 	});
 };
 //usage
