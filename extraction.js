@@ -41,12 +41,11 @@ const extractFiles = (file, account) => {
 		_.each(result, (item, key) => {
 			if (!getFileExtension(item).includes('/')) {
 				unpackOne(file, outputdir, item).then((payload) => {
-					uploadFile(payload, renameFile(payload, account));
+					uploadFile(payload, renameFile(payload, account),'ingestion-ph-dev-secondary');
 				}).catch(err => console.error(err));
 			}
 
 		})
-
 	})).catch(error => console.error(error)).finally(() => {
 		return new Promise((resolve, reject) => {
 			resolve('ok');
