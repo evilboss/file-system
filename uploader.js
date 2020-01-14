@@ -36,7 +36,6 @@ const uploadFile = (targetFile, fileName, buketName = 'ingestion-ph-dev-secondar
 			fs.unlink(targetFile, err => {
 				if (err) throw err;
 				// if no error, file has been deleted successfully
-				console.log('File deleted!');
 			});
 			console.log(`File uploaded successfully. ${data.Location}`);
 		}

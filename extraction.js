@@ -42,8 +42,6 @@ const extractFiles = (file, account) => {
 			if (!getFileExtension(item).includes('/')) {
 				unpackOne(file, outputdir, item).then((payload) => {
 					uploadFile(payload, renameFile(payload, account));
-				}).then(result => {
-					console.log('result:', result);
 				}).catch(err => console.error(err));
 			}
 
