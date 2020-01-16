@@ -8,6 +8,7 @@ const {getFilename, getFileExtension, isSupported, generatefileName, renameFile}
 const _ = require('lodash');
 // @ts-ignore
 const conversion = (file) => {
+  // @ts-ignore
   return new Promise((resolve, reject) => {
     const {getFilename, getFileExtension, getFile} = require('./filename');
     const images = ['bmp', 'gif', 'tiff'];
@@ -23,6 +24,7 @@ const conversion = (file) => {
     });
   });
 };
+// @ts-ignore
 module.exports = {
   conversion
 };
