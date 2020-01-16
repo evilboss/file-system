@@ -11,6 +11,19 @@
   "bin": {
     "extract": "echo extract"
   },
+  "watch": {
+    "run:processing": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts"
+    }
+  },
+  "scripts": {
+    "startprocessing": "npm run build:processing && node src/processing/processing.js",
+    "build:processing": "tsc src/processing/*.ts",
+    "run:processing": "npm-watch startprocessing"
+  },
   "dependencies": {
     "all-unpacker": "^0.1.3",
     "awesome-unoconv": "^1.0.1",
