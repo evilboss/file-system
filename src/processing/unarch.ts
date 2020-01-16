@@ -218,6 +218,8 @@ export default class Unarch {
         if (!unpackOnly) return callback(Error("Error: files or directory to extract form archive missing."), null);
 
         // Unar command:
+        // @ts-ignore
+
         var unar = (process.platform !== "linux") ? path.join(__dirname, 'unar') : 'unar';
         var ar = [unar];
 
