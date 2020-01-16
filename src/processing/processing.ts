@@ -9,37 +9,37 @@ const {getFilename, getFileExtension, isSupported, generatefileName, renameFile}
 const storagePath = `${process.env.PWD}/storage/`;
 // @ts-ignore
 const decideFileProcess = (target) => {
-  // @ts-ignore
-  return new Promise(((resolve, reject) => {
-    const operation = isSupported(getFileExtension(target));
-    if (operation !== 'unsupported file') {
-      resolve(operation);
-    } else {
-      reject('unsupported file');
-    }
-  }))
+    // @ts-ignore
+    return new Promise(((resolve, reject) => {
+        const operation = isSupported(getFileExtension(target));
+        if (operation !== 'unsupported file') {
+            resolve(operation);
+        } else {
+            reject('unsupported file');
+        }
+    }))
 };
 // @ts-ignore
 const processFile = (file, account) => {
-  // @ts-ignore
+    // @ts-ignore
 
-  return new Promise((resolve, reject) => {
-    decideFileProcess(file).then(operation => {
-      // @ts-ignore
+    return new Promise((resolve, reject) => {
+        decideFileProcess(file).then(operation => {
+            // @ts-ignore
 
-      operation(file, account).then((payload) => {
-        console.log(payload);
-        if (payload && payload.filename) {
-          resolve(uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket));
-        }
-        // @ts-ignore
-      }).catch(err => {
-        reject(err);
-      });
-    }).catch(error => {
-      reject(error);
+            operation(file, account).then((payload) => {
+                console.log(payload);
+                if (payload && payload.filename) {
+                    resolve(uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket));
+                }
+                // @ts-ignore
+            }).catch(err => {
+                reject(err);
+            });
+        }).catch(error => {
+            reject(error);
+        });
     });
-  });
 
 };
 
@@ -48,5 +48,6 @@ const processFile = (file, account) => {
 *  processFile('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
+processFile('./storage/ZIPS_Zip1.zip', "trebuche");
 // @ts-ignore
 module.exports = {processFile};
