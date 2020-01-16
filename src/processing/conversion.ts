@@ -8,24 +8,25 @@ const {getFilename, getFileExtension, isSupported, generatefileName, renameFile}
 const _ = require('lodash');
 // @ts-ignore
 const conversion = (file) => {
-  // @ts-ignore
-  return new Promise((resolve, reject) => {
     // @ts-ignore
-    const {getFilename, getFileExtension, getFile} = require('./filename');
-    const images = ['bmp', 'gif', 'tiff'];
 
-    const outDir = './storage/convert';
-    const format = (_.includes(images, getFileExtension(file))) ? 'png' : 'pdf';
-    // @ts-ignore
-    exec(`soffice --headless --convert-to ${format} ${file} --outdir ${outDir}`, (err, stdout, stderr) => {
-      (err) ? reject(err) : resolve({
-        filename: `${getFilename(file)}${outDir}/${getFilename(getFile(file))}.${format}`,
-        bucket: 'ingestion-ph-dev-fake-imaginary'
-      });
+    return new Promise((resolve, reject) => {
+        const {getFilename, getFileExtension, getFile} = require('./filename');
+        const images = ['bmp', 'gif', 'tiff'];
+
+        const outDir = './storage/convert';
+        const format = (_.includes(images, getFileExtension(file))) ? 'png' : 'pdf';
+        // @ts-ignore
+        exec(`soffice --headless --convert-to ${format} ${file} --outdir ${outDir}`, (err, stdout, stderr) => {
+            (err) ? reject(err) : resolve({
+                filename: `${outDir}/${getFilename(getFile(file))}.${format}`,
+                bucket: 'ingestion-ph-dev-secondary'
+            });
+        });
     });
-  });
 };
 // @ts-ignore
+
 module.exports = {
-  conversion
+    conversion
 };
