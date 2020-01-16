@@ -4,6 +4,8 @@ const _ = require('lodash');
 const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
+// @ts-ignore
+
 const storagePath = `${process.env.PWD}/storage/`;
 // @ts-ignore
 const decideFileProcess = (target) => {
@@ -19,6 +21,8 @@ const decideFileProcess = (target) => {
 };
 // @ts-ignore
 const processFile = (file, account) => {
+  // @ts-ignore
+
   return new Promise((resolve, reject) => {
     decideFileProcess(file).then(operation => {
       // @ts-ignore
@@ -44,4 +48,5 @@ const processFile = (file, account) => {
 *  processFile('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
+// @ts-ignore
 module.exports = {processFile};
