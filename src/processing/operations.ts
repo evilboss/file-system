@@ -9,45 +9,54 @@ const {extractFiles} = require('./extraction');
 
 
 const fileOperations = {
-  // @ts-ignore
-  extract: (file, accountName) => {
+    // @ts-ignore
+    extract: (file, accountName) => {
+// @ts-ignore
 
-    return new Promise(((resolve, reject) => {
-      extractFiles(file, accountName);
-      resolve('ok');
-    }));
-  },
-  // @ts-ignore
-  convert: (file) => {
-    return new Promise(((resolve, reject) => {
-      // @ts-ignore
-      conversion(file).then(result => {
-        resolve(result);
+        return new Promise(((resolve, reject) => {
+            extractFiles(file, accountName);
+            resolve('ok');
+        }));
+    },
+    // @ts-ignore
+    convert: (file) => {
         // @ts-ignore
-      }).catch(error => {
-        console.error(error)
-      })
-    }));
-  },
-  // @ts-ignore
-  dontConvert: (file) => {
-    return new Promise(
-      (resolve) => {
-        resolve({filename: file,bucket:'ingestion-ph-dev-fake-imaginary'});
-      })
-  },
-  // @ts-ignore
-  unsupported: (file) => {
-    return new Promise(
-      (resolve) => {
-        resolve({filename: '', bucket: ''});
-      })
-  }
+
+        return new Promise(((resolve, reject) => {
+            // @ts-ignore
+            conversion(file).then(result => {
+                resolve(result);
+                // @ts-ignore
+            }).catch(error => {
+                console.error(error)
+            })
+        }));
+    },
+    // @ts-ignore
+    dontConvert: (file) => {
+        // @ts-ignore
+
+        return new Promise(
+            (resolve) => {
+                resolve({filename: file, bucket: 'ingestion-ph-dev-fake-imaginary'});
+            })
+    },
+    // @ts-ignore
+    unsupported: (file) => {
+        // @ts-ignore
+
+        return new Promise(
+            (resolve) => {
+                resolve({filename: '', bucket: ''});
+            })
+    }
 
 };
 // @ts-ignore
 const getOperation = (ext) => {
-  // @ts-ignore
-  return fileOperations[ext];
+    // @ts-ignore
+    return fileOperations[ext];
 };
+// @ts-ignore
+
 module.exports = {getOperation};
