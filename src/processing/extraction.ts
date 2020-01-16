@@ -1,5 +1,6 @@
 // @ts-ignore
 const _ = require('lodash');
+// @ts-ignore
 const ua = require('./unar');
 // @ts-ignore
 const {uploadFile} = require('./uploader');
