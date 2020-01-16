@@ -7,6 +7,7 @@ const {uploadFile} = require('./uploader');
 const outputdir = './storage/extract/';
 // @ts-ignore
 const listAll = (target) => {
+  // @ts-ignore
   return new Promise((resolve, reject) => {
     // @ts-ignore
     ua.list(target, {quiet: true}, (error, files) => {
@@ -16,6 +17,7 @@ const listAll = (target) => {
 };
 // @ts-ignore
 const unpackOne = (target, output, file) => {
+  // @ts-ignore
   return new Promise((resolve, reject) => {
     ua.unpack(target, {
       archiveFile: target,
@@ -54,6 +56,7 @@ const extractFiles = (file, account) => {
     })
 
   })).catch(error => console.error(error)).finally(() => {
+    // @ts-ignore
     return new Promise((resolve, reject) => {
       resolve('ok');
 
@@ -61,6 +64,7 @@ const extractFiles = (file, account) => {
   })
   ;
 };
+// @ts-ignore
 module.exports = {
   extractFiles
 };
