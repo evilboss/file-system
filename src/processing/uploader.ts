@@ -2,6 +2,7 @@
 const AWS = require('aws-sdk');
 // @ts-ignore
 const fs = require('fs');
+// @ts-ignore
 
 const {accessKeyId, secretAccessKey, region} = require(`${process.env.PWD}/aws.s3.config.json`);
 const params = {
@@ -51,4 +52,5 @@ const uploadFile = (targetFile, fileName, buketName) => {
 //usage
 /*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
 */
+// @ts-ignore
 module.exports = {uploadFile};
