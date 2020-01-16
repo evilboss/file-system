@@ -43,6 +43,7 @@ const unpackOne = (target, output, file) => {
 // @ts-ignore
 
 const extractFiles = (file, account) => {
+  // @ts-ignore
   const {getFileExtension, renameFile} = require('./filename');
 
   listAll(file).then((result => {
