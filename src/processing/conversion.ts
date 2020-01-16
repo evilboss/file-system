@@ -10,6 +10,7 @@ const _ = require('lodash');
 const conversion = (file) => {
   // @ts-ignore
   return new Promise((resolve, reject) => {
+    // @ts-ignore
     const {getFilename, getFileExtension, getFile} = require('./filename');
     const images = ['bmp', 'gif', 'tiff'];
 
