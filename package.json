@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "mock-fs": "^4.10.3"
+    "mock-fs": "^4.10.3",
+    "typescript": "^3.7.4"
   },
   "bin": {
     "extract": "echo extract"
