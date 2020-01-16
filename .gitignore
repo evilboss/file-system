@@ -77,3 +77,4 @@ yarn.lock
 !/testStorage/.gitkeep
 /testStorage/*
 
+/src/processing/*.js

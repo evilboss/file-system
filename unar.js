@@ -56,7 +56,7 @@
 	unpackAll.unpack = (archiveFile, options, callback) => {
 		if (!callback) return new Error('No callback function');
 		if (!archiveFile) archiveFile = options.archiveFile;
-		if (!archiveFile) return callback(Error("Error: archiveFile or options.archiveFile missing."), null);
+		if (!archiveFile) return callback(Error("Error: archiveFile or optizons.archiveFile missing."), null);
 		if (!options) options = {};
 
 		// Unar command:
