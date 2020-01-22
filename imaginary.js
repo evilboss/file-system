@@ -32,7 +32,7 @@ const authenticate = () => {
 ;
 
 
-const uploadFile = (file) => {
+const uploadFile = (file, filename) => {
 	return new Promise((resolve, reject) => {
 		authenticate().then((token) => {
 			return token;
@@ -56,7 +56,7 @@ const uploadFile = (file) => {
 								value: fs.createReadStream(file),
 								options:
 									{
-										filename: 'filesample.pdf',
+										filename: filename,
 									}
 							}
 					}
