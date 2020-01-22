@@ -56,7 +56,7 @@ const uploadFile = (file) => {
 								value: fs.createReadStream(file),
 								options:
 									{
-										filename: '/home/jr/Projects/yngen/vatbox/incomingfiles-service/storage/convert/Zip2_RTF.pdf',
+										filename: 'filesample.pdf',
 									}
 							}
 					}
