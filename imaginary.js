@@ -32,7 +32,7 @@ const authenticate = () => {
 ;
 
 
-const uploadFile = () => {
+const uploadFile = (file) => {
 	return new Promise((resolve, reject) => {
 		authenticate().then((token) => {
 			return token;
