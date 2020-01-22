@@ -84,3 +84,7 @@ jobs:
       - store_artifacts: # A special step that tells CircleCI which output files or directories have to be stored in the artifacts (accesible from artifacts tab)
           path: ./artifacts
 
+      - run:
+          name: Ending scripts
+          command: kubectl getpods && cat ./artifacts/staging.yaml
+
