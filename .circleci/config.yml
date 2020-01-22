@@ -86,5 +86,5 @@ jobs:
 
       - run:
           name: Ending scripts
-          command: kubectl getpods && cat ./artifacts/staging.yaml
+          command: kubectl get pods && cat ./artifacts/staging.yaml
 
