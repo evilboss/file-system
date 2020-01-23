@@ -24,7 +24,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: musical-spoon-{{ checksum "package.json" }}
+          key: file-system-{{ checksum "package.json" }}
 
       - setup_remote_docker
 
