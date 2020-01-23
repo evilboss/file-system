@@ -19,5 +19,5 @@ patchesJson6902:
       group: apps
       version: beta
       kind: Deployment
-      name: musical-spoon
+      name: file-system
     path: args.yaml
