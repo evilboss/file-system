@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: file-system-config
   labels:
-    name: musical-spoon-config
+    name: file-system-config
