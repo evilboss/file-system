@@ -57,7 +57,7 @@ jobs:
           name: Docker publish
           command: |
             # Generate the image name
-            IMAGE_NAME=${AWS_REG_URL}/musicalspoon:$(node change-ver.js ${CIRCLE_BUILD_NUM} ${CIRCLE_BRANCH}) # Generate the change cause (for rollout history)
+            IMAGE_NAME=${AWS_REG_URL}/filesystem:$(node change-ver.js ${CIRCLE_BUILD_NUM} ${CIRCLE_BRANCH}) # Generate the change cause (for rollout history)
             CHANGE_CAUSE="Build: "${CIRCLE_BUILD_NUM}"; Branch: "${CIRCLE_BRANCH}
             # Print the image name for reference
             echo 'Image: '${IMAGE_NAME}
