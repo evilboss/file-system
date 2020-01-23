@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: musical-spoon
+  name: file-system
 spec:
   template:
     spec:
