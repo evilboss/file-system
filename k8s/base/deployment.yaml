@@ -16,6 +16,6 @@ spec:
     spec:
 
       containers:
-        - name: musical-spoon
+        - name: file-system
           ports:
             - containerPort: 3000
