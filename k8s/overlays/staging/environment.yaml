@@ -11,3 +11,7 @@ spec:
     spec:
       containers:
         - name: musical-spoon
+
+          env:
+            - name: TEST_ENV_VAR
+              value: foobar
