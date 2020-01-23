@@ -25,3 +25,5 @@ spec:
             - name: INCOMING_SECONDARY_FOLDER
               value: SemiProcessedFiles
 
+            - name: OUTGOING_FOLDER
+              value: FurtherProcessingFiles
