@@ -13,7 +13,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: musical-spoon-{{ checksum "package.json" }}
+          key: file-system-{{ checksum "package.json" }}
 
       - run:
           name: npm install
