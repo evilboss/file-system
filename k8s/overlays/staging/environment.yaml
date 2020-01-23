@@ -13,9 +13,6 @@ spec:
         - name: musical-spoon
 
           env:
-            - name: TEST_ENV_VAR
-              value: foobar
-
             - name: S3_BUCKET
               value: vatbox-bucket-staging
 
