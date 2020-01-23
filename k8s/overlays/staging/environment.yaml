@@ -18,3 +18,6 @@ spec:
 
             - name: S3_BUCKET
               value: vatbox-bucket-staging
+
+            - name: INCOMING_PRIMARY_FOLDER
+              value: IncomingFiles
