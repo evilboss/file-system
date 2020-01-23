@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/musical-spoon
+    working_directory: ~/file-system
     docker:
       - image: circleci/node:12.13.0
 
