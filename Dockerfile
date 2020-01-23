@@ -5,7 +5,7 @@ FROM node:12.13.0
 WORKDIR /musical-spoon
 
 # app dependencies
-COPY package*.json /musical-spoon/
+COPY package*.json /file-system/
 
 # install deps
 RUN apt update && apt upgrade -y && apt install libreoffice --no-install-recommends unar openjdk-8-jdk tree -y && apt clean
