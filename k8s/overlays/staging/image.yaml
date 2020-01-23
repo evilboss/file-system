@@ -8,5 +8,5 @@ spec:
   template:
     spec:
       containers:
-        - name: musical-spoon
+        - name: file-system
           image: 'IMAGE_NAME'
