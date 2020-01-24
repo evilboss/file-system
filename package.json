@@ -29,6 +29,7 @@
     "awesome-unoconv": "^1.0.1",
     "aws-sdk": "^2.589.0",
     "directory-tree": "^2.2.4",
+    "dotenv": "^8.2.0",
     "edge-js": "^13.0.1",
     "file-type": "^12.4.0",
     "libreoffice-convert": "^1.0.4",
