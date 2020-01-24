@@ -5,14 +5,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: file-system
+  name: musical-spoon
 spec:
   template:
     spec:
       containers:
-        - name: file-system
+        - name: musical-spoon
 
           env:
+            - name: NODE_ENV
+              value: staging
+
             - name: S3_BUCKET
               value: vatbox-bucket-staging
 
@@ -24,3 +27,6 @@ spec:
 
             - name: OUTGOING_FOLDER
               value: FurtherProcessingFiles
+
+            - name: MONGNO_URL
+              value: placeholder
