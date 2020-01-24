@@ -2,4 +2,4 @@ let INCOMING_PRIMARY_FOLDER;
 
 
 
-module.exports = {};
+module.exports = {INCOMING_PRIMARY_FOLDER};
