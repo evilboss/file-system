@@ -30,3 +30,6 @@ spec:
 
             - name: MONGNO_URL
               value: placeholder
+
+            - name: TEST_ENV_VAR
+              value: ${TEST_ENV_VAR}
