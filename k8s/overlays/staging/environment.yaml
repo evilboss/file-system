@@ -31,5 +31,8 @@ spec:
             - name: MONGNO_URL
               value: placeholder
 
+            - name: IMAGINARY_UPLOAD_URL
+              value: http://imaginary/api/exposed/v1.0/asset
+
             - name: TEST_ENV_VAR
               value: ${TEST_ENV_VAR}
