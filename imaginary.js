@@ -28,8 +28,7 @@ const authenticate = () => {
 				resolve(JSON.parse(body).user_token);
 			});
 		})
-	}
-;
+	};
 
 
 const uploadFile = (file, filename) => {
