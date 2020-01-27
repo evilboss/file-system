@@ -30,7 +30,7 @@ EXPOSE 3000
 
 # run
 # expose port
-# ENV NODE_ENV=staging
+# ENV NODE_ENV=staginggag
 
 # run
 CMD node app.js
