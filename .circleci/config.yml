@@ -47,12 +47,6 @@ jobs:
           name: install libreoffice
           command: |
             sudo apt-get --no-install-recommends install libreoffice
-
-      - run:
-          name: install unar
-          command: |
-            sudo apt-get install unar
-
       - run:
           name: Docker publish
           command: |
