@@ -16,6 +16,13 @@ jobs:
           key: file-system-{{ checksum "package.json" }}
 
       - run:
+          name: Setup Environment Variables
+          command: |
+            echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+            echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
+
+
+      - run:
           name: npm install
           command: |
             NEW_PACKAGE_VERSION=$(node change-ver.js ${CIRCLE_BUILD_NUM}) ; npm --no-git-tag-version version $NEW_PACKAGE_VERSION
@@ -47,6 +54,7 @@ jobs:
           name: install libreoffice
           command: |
             sudo apt-get --no-install-recommends install libreoffice
+
       - run:
           name: Docker publish
           command: |
