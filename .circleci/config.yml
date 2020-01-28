@@ -21,6 +21,9 @@ jobs:
             echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
             echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
 
+      - run:
+          name: test show bash env var
+          command: echo "${TEST_ENV_VAR}"
 
       - run:
           name: npm install
