@@ -11,7 +11,7 @@ async function listDatabases(client) {
 
 
 async function main() {
-	const client = new MongoClient(encodeURI(MONGNO_URL));
+	const client = new MongoClient(MONGNO_URL);
 
 	try {
 		// Connect to the MongoDB cluster
