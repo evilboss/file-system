@@ -5,12 +5,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: file-system
+  name: musical-spoon
+
 spec:
   template:
     spec:
       containers:
-        - name: file-system
+        - name: musical-spoon
 
           env:
             - name: NODE_ENV
@@ -34,10 +35,8 @@ spec:
             - name: IMAGINARY_UPLOAD_URL
               value: http://imaginary/api/exposed/v1.0/asset
 
-            - name: TEST_ENV_VAR
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
+            - name: AWS_KEY
+              value: Replace with AWS_KEY
 
             - name: POD_NAME
               valueFrom:
