@@ -69,6 +69,8 @@ typings/
 .env.test
 yarn.lock
 .idea
+deployment/
+
 !/storage/tar/.gitkeep
 /storage/
 /aws.s3.config.json
