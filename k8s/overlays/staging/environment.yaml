@@ -38,6 +38,9 @@ spec:
             - name: AWS_KEY
               value: Replace with AWS_KEY
 
+            - name: AWS_SECRET
+              value: Replace with AWS_SECRET
+
             - name: POD_NAME
               valueFrom:
                 fieldRef:
