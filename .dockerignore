@@ -108,5 +108,7 @@ dist
 yarn.lock
 node_modules
 storage/*/*
+deployment/
+
 !storage/extract/.gitkeep
 !storage/convert/.gitkeep
