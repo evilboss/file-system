@@ -29,16 +29,19 @@ spec:
             - name: OUTGOING_FOLDER
               value: FurtherProcessingFiles
 
-            - name: MONGNO_URL
+            - name: MONGO_URL
+              value: placeholder
+
+            - name: MONGO_DB_NAME
               value: placeholder
 
             - name: IMAGINARY_UPLOAD_URL
               value: http://imaginary/api/exposed/v1.0/asset
 
-            - name: AWS_KEY
+            - name: AWS_ACCESS_KEY_ID
               value: Replace with AWS_KEY
 
-            - name: AWS_SECRET
+            - name: AWS_SECRET_ACCESS_KEY
               value: Replace with AWS_SECRET
 
             - name: POD_NAME
