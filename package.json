@@ -35,6 +35,7 @@
     "libreoffice-convert": "^1.0.4",
     "lodash": "^4.17.15",
     "mmmagic": "^0.5.3",
+    "mongodb": "^3.5.2",
     "node-7z": "^2.0.4",
     "node-msoffice-pdf": "^0.0.7",
     "node-stream-zip": "^1.8.2",
