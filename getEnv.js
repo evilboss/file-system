@@ -1,1 +1,2 @@
-console.log(process.env.TEST_ENV_VAR);
+const config = require('./appConfig');
+console.log(process.env.OUTGOING_FOLDER);
