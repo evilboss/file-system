@@ -1,4 +1,6 @@
+const config = require('./appConfig');
 const {MongoClient} = require('mongodb');
+const {MONGNO_URL} = process.env;
 
 async function listDatabases(client) {
 	databasesList = await client.db().admin().listDatabases();
@@ -9,7 +11,7 @@ async function listDatabases(client) {
 
 
 async function main() {
-	const client = new MongoClient('mongodb://localhost:27017');
+	const client = new MongoClient(MONGNO_URL);
 
 	try {
 		// Connect to the MongoDB cluster
