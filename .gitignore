@@ -80,3 +80,4 @@ deployment/
 /testStorage/*
 
 /src/processing/*.js
+.env-local
