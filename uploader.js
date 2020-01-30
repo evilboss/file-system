@@ -54,4 +54,5 @@ const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 //usage
 /*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
 */
+// @ts-ignore
 module.exports = {uploadFile};
