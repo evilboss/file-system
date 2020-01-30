@@ -31,6 +31,7 @@ const process = (file, account) => {
 
 				if (payload.imaginary) {
 					console.log('upload to imaginary');
+
 				} else {
 					console.log(`upload to ${payload.folder}`);
 				}
@@ -54,3 +55,4 @@ const process = (file, account) => {
 
 
 process('./testStorage/DATA_Ingestion/data.csv', "CoronaVirus");
+process('./testStorage/DATA_Ingestion/GIF.gif', "CoronaVirus");
