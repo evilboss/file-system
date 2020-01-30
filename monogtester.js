@@ -21,7 +21,7 @@ async function listCollections(client) {
 async function main() {
 	console.log(`Mongo url ${MONGO_URL}/${MONGO_DB_NAME}`);
 	console.log(`pacific service host ${PACIFIC_SERVICE_HOST}`);
-	const client = new MongoClient(`${MONGO_URL}/harvester_test`, {useUnifiedTopology: true});
+	const client = new MongoClient(`${MONGO_URL}`, {useUnifiedTopology: true});
 
 	try {
 		// Connect to the MongoDB cluster
