@@ -5,7 +5,7 @@ const fs = require('fs');
 // @ts-ignore
 const config = require('./appConfig');
 // @ts-ignore
-const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
+const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, NODE_ENV} = process.env;
 const params = {
     Bucket: S3_BUCKET,
     CreateBucketConfiguration: {
@@ -35,19 +35,23 @@ const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 
     // Uploading files to the bucket
     // @ts-ignore
-    s3.upload(params, (err, data) => {
-        if (err) {
-            throw err;
-        } else {
-            // @ts-ignore
-            fs.unlink(targetFile, err => {
-                if (err) throw err;
-                // if no error, file has been deleted successfully
-            });
-            console.log(`File uploaded successfully. ${data.Location}`);
-        }
+    console.log(targetFile, fileName);
+    if (NODE_ENV !== 'local') {
+        s3.upload(params, (err, data) => {
+            if (err) {
+                throw err;
+            } else {
+                // @ts-ignore
+                fs.unlink(targetFile, err => {
+                    if (err) throw err;
+                    // if no error, file has been deleted successfully
+                });
+                console.log(`File uploaded successfully. ${data.Location}`);
+            }
 
-    });
+        });
+
+    }
 };
 //usage
 /*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
