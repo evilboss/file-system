@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const ua = require('./unar');
 const {uploadFile} = require('./uploader');
-
+const {INCOMING_SECONDARY_FOLDER} = process.env;
 const outputdir = './storage/extract/';
 const listAll = (target) => {
 	return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ const extractFiles = (file, account) => {
 		_.each(result, (item, key) => {
 			if (!getFileExtension(item).includes('/')) {
 				unpackOne(file, outputdir, item).then((payload) => {
-					uploadFile(payload, renameFile(payload, account),'ingestion-ph-dev-secondary');
+					uploadFile(payload, `INCOMING_SECONDARY_FOLDER/${renameFile(payload, account)}`, 'ingestion-ph-dev-secondary');
 				}).catch(err => console.error(err));
 			}
 

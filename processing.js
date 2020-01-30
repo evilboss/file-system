@@ -12,13 +12,15 @@ const decideFileProcess = (target) => {
 		}
 	}))
 };
+
 const process = (file, account) => {
 
 	decideFileProcess(file).then(operation => {
 		operation(file, account).then((payload) => {
 			console.log(payload);
 			if (payload && payload.filename) {
-				uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
+				//uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
+
 			}
 		}).catch(err => {
 			console.error(err)
