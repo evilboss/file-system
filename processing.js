@@ -1,7 +1,11 @@
+// @ts-ignore
 const _ = require('lodash');
+// @ts-ignore
 const {uploadFile} = require('./uploader');
+// @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
 
+// @ts-ignore
 const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
 		const operation = isSupported(getFileExtension(target));
@@ -13,9 +17,14 @@ const decideFileProcess = (target) => {
 	}))
 };
 
+// @ts-ignore
 const process = (file, account) => {
 
 	decideFileProcess(file).then(operation => {
+		// @ts-ignore
+		// @ts-ignore
+		// @ts-ignore
+		// @ts-ignore
 		operation(file, account).then((payload) => {
 			console.log(payload);
 			if (payload && payload.filename) {
@@ -28,6 +37,7 @@ const process = (file, account) => {
 				//uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
 
 			}
+			// @ts-ignore
 		}).catch(err => {
 			console.error(err)
 		});
@@ -41,5 +51,6 @@ const process = (file, account) => {
 *  process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
+
 
 process('./testStorage/DATA_Ingestion/data.csv', "CoronaVirus");
