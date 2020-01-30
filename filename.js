@@ -35,7 +35,6 @@ const isCSVFile = (ext) => {
 };
 
 const isSupported = (ext) => {
-	console.log(isCSVFile(ext));
 	return (
 		isSupportedArchive(ext)) ?
 		getOperation('extract') :

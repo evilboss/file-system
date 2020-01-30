@@ -5,7 +5,6 @@ const {getFilename, getFileExtension, isSupported, generatefileName, renameFile}
 const decideFileProcess = (target) => {
 	return new Promise(((resolve, reject) => {
 		const operation = isSupported(getFileExtension(target));
-		console.log(operation);
 		if (operation !== 'unsupported file') {
 			resolve(operation);
 		} else {
@@ -20,7 +19,12 @@ const process = (file, account) => {
 		operation(file, account).then((payload) => {
 			console.log(payload);
 			if (payload && payload.filename) {
-				console.log('upload to imaginary');
+
+				if (payload.imaginary) {
+					console.log('upload to imaginary');
+				} else {
+					console.log(`upload to ${payload.folder}`);
+				}
 				//uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
 
 			}

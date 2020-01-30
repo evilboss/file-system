@@ -12,7 +12,7 @@ const conversion = (file) => {
 		exec(`soffice --headless --convert-to ${format} ${file} --outdir ${outDir}`, (err, stdout, stderr) => {
 			(err) ? reject(err) : resolve({
 				filename: `${outDir}/${getFilename(getFile(file))}.${format}`,
-				bucket: 'ingestion-ph-dev-secondary'
+				imaginary: true
 			});
 		});
 	});

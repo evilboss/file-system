@@ -22,7 +22,7 @@ const fileOperations = {
 	dontConvert: (file) => {
 		return new Promise(
 			(resolve) => {
-				resolve({filename: file, bucket: 'ingestion-ph-dev-main'});
+				resolve({filename: file, imaginary: true});
 			})
 	},
 	uploadToFurtherProcessing: (file) => {
