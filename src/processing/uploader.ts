@@ -37,6 +37,7 @@ const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
     // @ts-ignore
     console.log(targetFile, fileName);
     if (NODE_ENV !== 'local') {
+        // @ts-ignore
         s3.upload(params, (err, data) => {
             if (err) {
                 throw err;
