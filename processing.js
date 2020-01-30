@@ -23,9 +23,6 @@ const process = (file, account) => {
 
 	decideFileProcess(file).then(operation => {
 		// @ts-ignore
-		// @ts-ignore
-		// @ts-ignore
-		// @ts-ignore
 		operation(file, account).then((payload) => {
 			console.log(payload);
 			if (payload && payload.filename) {
