@@ -1,20 +1,20 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
-
-const {accessKeyId, secretAccessKey, region} = require('./aws.s3.config.json');
+const config = require('./appConfig');
+const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
 const params = {
-	Bucket: 'testbucketingestion',
+	Bucket: S3_BUCKET,
 	CreateBucketConfiguration: {
 		// Set your region here
-		LocationConstraint: region
+		LocationConstraint: "eu-west-1"
 	}
 };
 const s3 = new AWS.S3({
-	accessKeyId: accessKeyId,
-	secretAccessKey: secretAccessKey
+	accessKeyId: AWS_ACCESS_KEY_ID,
+	secretAccessKey: AWS_SECRET_ACCESS_KEY
 });
 
-const uploadFile = (targetFile, fileName, buketName = 'ingestion-ph-dev-fake-imaginary') => {
+const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 	// Read content from the file
 	if (!targetFile && !fileName) {
 		console.error('targetFile and targetfilename required to upload file');
@@ -23,7 +23,7 @@ const uploadFile = (targetFile, fileName, buketName = 'ingestion-ph-dev-fake-ima
 	const fileContent = fs.readFileSync(targetFile);
 	// Setting up S3 upload parameters
 	const params = {
-		Bucket: buketName,
+		Bucket: S3_BUCKET,
 		Key: fileName, // File name you want to save as in S3
 		Body: fileContent
 	};
