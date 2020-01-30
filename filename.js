@@ -30,15 +30,22 @@ const isSupportedFileFormats = (ext) => {
 const isSupportedArchive = (ext) => {
 	return (_.includes(supportedArchives, ext.toLowerCase()));
 };
+const isCSVFile = (ext) => {
+	return ext === 'csv';
+};
+
 const isSupported = (ext) => {
-	/*TODO: return don't convert if files are [jpg, psd,png,pdf]*/
-	return (isSupportedArchive(ext)) ?
+	console.log(isCSVFile(ext));
+	return (
+		isSupportedArchive(ext)) ?
 		getOperation('extract') :
 		(isSupportedFileFormats(ext)) ?
 			(isDefaultFormats(ext)) ?
 				getOperation('dontConvert') :
 				getOperation('convert', ext) :
-			getOperation('unsupported');
+			(isCSVFile(ext)) ?
+				getOperation('uploadToFurtherProcessing') :
+				getOperation('unsupported');
 };
 
 module.exports = {
