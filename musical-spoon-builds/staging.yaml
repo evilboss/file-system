@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    env: staging
+    name: musical-spoon-config
+  name: musical-spoon-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: musical-spoon
+    env: staging
+  name: musical-spoon
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: musical-spoon
+    env: staging
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: musical-spoon
+    env: staging
+  name: musical-spoon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: musical-spoon
+      env: staging
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: 'Build: 113; Branch: master'
+      labels:
+        app: musical-spoon
+        env: staging
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: staging
+            - name: S3_BUCKET
+              value: vatbox-bucket-staging
+            - name: INCOMING_PRIMARY_FOLDER
+              value: IncomingFiles
+            - name: INCOMING_SECONDARY_FOLDER
+              value: SemiProcessedFiles
+            - name: OUTGOING_FOLDER
+              value: FurtherProcessingFiles
+            - name: MONGO_URL
+              value: placeholder
+            - name: MONGO_DB_NAME
+              value: placeholder
+            - name: IMAGINARY_UPLOAD_URL
+              value: http://imaginary/api/exposed/v1.0/asset
+            - name: AWS_ACCESS_KEY_ID
+              value: Replace with AWS_KEY
+            - name: AWS_SECRET_ACCESS_KEY
+              value: Replace with AWS_SECRET
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          image: 395499912268.dkr.ecr.eu-west-1.amazonaws.com/musicalspoon:1.0.113
+          name: musical-spoon
+          ports:
+            - containerPort: 3000
