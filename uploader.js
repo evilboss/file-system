@@ -1,4 +1,6 @@
+// @ts-ignore
 const AWS = require('aws-sdk');
+// @ts-ignore
 const fs = require('fs');
 const config = require('./appConfig');
 const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env;
@@ -14,6 +16,7 @@ const s3 = new AWS.S3({
 	secretAccessKey: AWS_SECRET_ACCESS_KEY
 });
 
+// @ts-ignore
 const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 	// Read content from the file
 	if (!targetFile && !fileName) {
@@ -29,10 +32,12 @@ const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 	};
 
 	// Uploading files to the bucket
+	// @ts-ignore
 	s3.upload(params, (err, data) => {
 		if (err) {
 			throw err;
 		} else {
+			// @ts-ignore
 			fs.unlink(targetFile, err => {
 				if (err) throw err;
 				// if no error, file has been deleted successfully
