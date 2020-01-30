@@ -6,13 +6,13 @@ const {conversion} = require('./conversion');
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
 // @ts-ignore
 const {extractFiles} = require('./extraction');
+// @ts-ignore
 
-
+const {OUTGOING_FOLDER} = process.env;
 const fileOperations = {
     // @ts-ignore
     extract: (file, accountName) => {
-// @ts-ignore
-
+        // @ts-ignore
         return new Promise(((resolve, reject) => {
             extractFiles(file, accountName);
             resolve('ok');
@@ -21,12 +21,9 @@ const fileOperations = {
     // @ts-ignore
     convert: (file) => {
         // @ts-ignore
-
         return new Promise(((resolve, reject) => {
-            // @ts-ignore
             conversion(file).then(result => {
                 resolve(result);
-                // @ts-ignore
             }).catch(error => {
                 console.error(error)
             })
@@ -35,16 +32,21 @@ const fileOperations = {
     // @ts-ignore
     dontConvert: (file) => {
         // @ts-ignore
-
         return new Promise(
             (resolve) => {
-                resolve({filename: file, bucket: 'ingestion-ph-dev-fake-imaginary'});
+                resolve({filename: file, imaginary: true});
             })
+    },
+    // @ts-ignore
+    uploadToFurtherProcessing: (file) => {
+        // @ts-ignore
+        return new Promise(resolve => {
+            resolve({filename: file, folder: OUTGOING_FOLDER})
+        })
     },
     // @ts-ignore
     unsupported: (file) => {
         // @ts-ignore
-
         return new Promise(
             (resolve) => {
                 resolve({filename: '', bucket: ''});
@@ -58,5 +60,4 @@ const getOperation = (ext) => {
     return fileOperations[ext];
 };
 // @ts-ignore
-
 module.exports = {getOperation};
