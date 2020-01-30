@@ -4,6 +4,7 @@ const _ = require('lodash');
 const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
+const {imaginary} = require('./imaginary');
 
 // @ts-ignore
 const decideFileProcess = (target) => {
@@ -30,12 +31,15 @@ const process = (file, account) => {
 			if (payload && payload.filename) {
 
 				if (payload.imaginary) {
+					imaginary.uploadFile(payload.filename, renameFile(payload.filename, account));
 					console.log('upload to imaginary');
+
 
 				} else {
 					console.log(`upload to ${payload.folder}`);
+					uploadFile(payload.filename, `${payload.folder}/${renameFile(payload.filename, account)}`, payload.bucket);
+
 				}
-				//uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
 
 			}
 			// @ts-ignore

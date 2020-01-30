@@ -25,7 +25,7 @@ const uploadFile = (file, filename) => {
 						}
 				}
 		};
-		console.log(options);
+		console.log(options, file, filename);
 		if (NODE_ENV !== 'local') {
 			request(options, (error, response, body) => {
 				console.log(body);
