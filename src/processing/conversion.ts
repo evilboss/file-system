@@ -9,7 +9,7 @@ const _ = require('lodash');
 // @ts-ignore
 const conversion = (file) => {
     // @ts-ignore
-
+    // @ts-ignore
     return new Promise((resolve, reject) => {
         // @ts-ignore
         const {getFilename, getFileExtension, getFile} = require('./filename');
@@ -21,13 +21,12 @@ const conversion = (file) => {
         exec(`soffice --headless --convert-to ${format} ${file} --outdir ${outDir}`, (err, stdout, stderr) => {
             (err) ? reject(err) : resolve({
                 filename: `${outDir}/${getFilename(getFile(file))}.${format}`,
-                bucket: 'ingestion-ph-dev-secondary'
+                imaginary: true
             });
         });
     });
 };
 // @ts-ignore
-
 module.exports = {
-    conversion
+    conversion: conversion
 };
