@@ -4,9 +4,7 @@ const _ = require('lodash');
 const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
-// @ts-ignore
 
-const storagePath = `${process.env.PWD}/storage/`;
 // @ts-ignore
 const decideFileProcess = (target) => {
     // @ts-ignore
@@ -19,35 +17,38 @@ const decideFileProcess = (target) => {
         }
     }))
 };
+
 // @ts-ignore
-const processFile = (file, account) => {
-    // @ts-ignore
+const process = (file, account) => {
 
-    return new Promise((resolve, reject) => {
-        decideFileProcess(file).then(operation => {
-            // @ts-ignore
+    decideFileProcess(file).then(operation => {
+        // @ts-ignore
+        // @ts-ignore
+        // @ts-ignore
+        // @ts-ignore
+        operation(file, account).then((payload) => {
+            console.log(payload);
+            if (payload && payload.filename) {
 
-            operation(file, account).then((payload) => {
-                console.log(payload);
-                if (payload && payload.filename) {
-                    resolve(uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket));
+                if (payload.imaginary) {
+                    console.log('upload to imaginary');
+                } else {
+                    console.log(`upload to ${payload.folder}`);
                 }
-                // @ts-ignore
-            }).catch(err => {
-                reject(err);
-            });
-        }).catch(error => {
-            reject(error);
-        });
-    });
+                //uploadFile(payload.filename, renameFile(payload.filename, account), payload.bucket);
 
+            }
+            // @ts-ignore
+        }).catch(err => {
+            console.error(err)
+        });
+    }).catch(error => {
+        console.error(error)
+    });
 };
 
 /*
 *  USAGE:
-*  processFile('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
+*  process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
-processFile('./storage/ZIPS_Zip1.zip', "trebuche");
-// @ts-ignore
-module.exports = {processFile};
