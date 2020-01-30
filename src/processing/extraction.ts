@@ -1,10 +1,13 @@
 // @ts-ignore
 const _ = require('lodash');
 // @ts-ignore
+
 const ua = require('./unar');
 // @ts-ignore
 const {uploadFile} = require('./uploader');
+// @ts-ignore
 
+const {INCOMING_SECONDARY_FOLDER} = process.env;
 const outputdir = './storage/extract/';
 // @ts-ignore
 const listAll = (target) => {
@@ -26,7 +29,7 @@ const unpackOne = (target, output, file) => {
             files: file,
             quiet: true,
             forceOverwrite: true,
-// @ts-ignore
+            // @ts-ignore
         }, (err, files, info) => {
             if (err) {
                 console.error(err);
@@ -41,25 +44,23 @@ const unpackOne = (target, output, file) => {
     });
 };
 // @ts-ignore
-
 const extractFiles = (file, account) => {
     // @ts-ignore
-    const {getFileExtension, renameFile, getFilename} = require('./filename');
+    const {getFileExtension, renameFile} = require('./filename');
 
     listAll(file).then((result => {
-// @ts-ignore
+        // @ts-ignore
         _.each(result, (item, key) => {
             if (!getFileExtension(item).includes('/')) {
                 unpackOne(file, outputdir, item).then((payload) => {
-                    console.log('getfilename', getFilename(file));
-                    uploadFile(payload, renameFile(`${getFilename(file)}/${payload}`, account), 'ingestion-ph-dev-secondary');
+                    uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`, 'ingestion-ph-dev-secondary');
                 }).catch(err => console.error(err));
             }
 
         })
-
     })).catch(error => console.error(error)).finally(() => {
         // @ts-ignore
+
         return new Promise((resolve, reject) => {
             resolve('ok');
 
