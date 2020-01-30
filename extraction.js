@@ -1,16 +1,20 @@
+// @ts-ignore
 const _ = require('lodash');
 const ua = require('./unar');
+// @ts-ignore
 const {uploadFile} = require('./uploader');
 const {INCOMING_SECONDARY_FOLDER} = process.env;
 const outputdir = './storage/extract/';
+// @ts-ignore
 const listAll = (target) => {
 	return new Promise((resolve, reject) => {
+		// @ts-ignore
 		ua.list(target, {quiet: true}, (error, files) => {
 			(error) ? reject(error) : resolve(_.drop(files));
 		})
 	})
 };
-
+// @ts-ignore
 const unpackOne = (target, output, file) => {
 	return new Promise((resolve, reject) => {
 		ua.unpack(target, {
@@ -19,7 +23,7 @@ const unpackOne = (target, output, file) => {
 			files: file,
 			quiet: true,
 			forceOverwrite: true,
-
+// @ts-ignore
 		}, (err, files, info) => {
 			if (err) {
 				console.error(err);
@@ -33,11 +37,12 @@ const unpackOne = (target, output, file) => {
 
 	});
 };
-
+// @ts-ignore
 const extractFiles = (file, account) => {
 	const {getFileExtension, renameFile} = require('./filename');
 
 	listAll(file).then((result => {
+		// @ts-ignore
 		_.each(result, (item, key) => {
 			if (!getFileExtension(item).includes('/')) {
 				unpackOne(file, outputdir, item).then((payload) => {
