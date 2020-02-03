@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    env: staging
+    name: incomingfiles-service-config
+  name: incomingfiles-service-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: incomingfiles-service
+    env: staging
+  name: incomingfiles-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: incomingfiles-service
+    env: staging
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: incomingfiles-service
+    env: staging
+  name: incomingfiles-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: incomingfiles-service
+      env: staging
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: 'Build: 11; Branch: master'
+      labels:
+        app: incomingfiles-service
+        env: staging
+    spec:
+      containers:
+        - env:
+            - name: S3_BUCKET
+              value: vatbox-bucket-staging
+            - name: INCOMING_PRIMARY_FOLDER
+              value: IncomingFiles
+            - name: INCOMING_SECONDARY_FOLDER
+              value: SemiProcessedFiles
+            - name: OUTGOING_FOLDER
+              value: FurtherProcessingFiles
+            - name: MONGNO_URL
+              value: placeholder
+          image: 395499912268.dkr.ecr.eu-west-1.amazonaws.com/incoming-files:1.0.11
+          name: incomingfiles-service
+        - name: musical-spoon
+          ports:
+            - containerPort: 3000
