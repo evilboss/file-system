@@ -6,6 +6,7 @@ const fs = require("fs");
 const {NODE_ENV, IMAGINARY_UPLOAD_URL} = process.env;
 
 
+// @ts-ignore
 const uploadFile = (file, filename) => {
 	// @ts-ignore
 	return new Promise((resolve, reject) => {
@@ -27,6 +28,7 @@ const uploadFile = (file, filename) => {
 		};
 		console.log(options, file, filename);
 		if (NODE_ENV !== 'local') {
+			// @ts-ignore
 			request(options, (error, response, body) => {
 				console.log(body);
 
