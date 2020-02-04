@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 const fs = require('fs');
 const {exec} = require('child_process');
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
