@@ -30,6 +30,10 @@ describe('filename', () => {
 
 	});
 	describe('generatefileName', () => {
+		it('should get generatefileName of a normal file', () => {
+			expect(generatefileName('file.pdf','recliame4amazon')).toBe('recliame4amazon/file.pdf');
+		});
+
 		it('should get generatefileName of file with multiple dot file', () => {
 			expect(generatefileName('sample.somedir.somefile.pdf','recliame4amazon')).toBe('recliame4amazon/sample.somedir.somefile.pdf');
 		});
