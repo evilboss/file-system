@@ -1,9 +1,13 @@
 const {getOperation, fileOperations} = require('./operations');
 describe('operations', () => {
 	describe('getOperation', () => {
-		it('Should be getOperation', () => {
-			expect(getOperation('extract')).toMatchObject(fileOperations('extract'));
+		it('Should be getOperation extract', () => {
+			expect(getOperation('extract')).toMatchObject(fileOperations.extract());
 		});
+		it('Should be getOperation convert', () => {
+			expect(getOperation('convert')).toMatchObject(fileOperations.convert());
+		});
+
 
 	});
 	describe('fileOperations', () => {
@@ -11,7 +15,7 @@ describe('operations', () => {
 			expect(fileOperations.extract()).toMatchObject(getOperation('extract'));
 		});
 		it('Should be fileOperations.convert', () => {
-			expect(fileOperations.convert()).toMatchObject(getOperation('extract'));
+			expect(fileOperations.convert()).toMatchObject(getOperation('convert'));
 		});
 		it('Should be fileOperations.dontConvert', () => {
 			expect(fileOperations.dontConvert()).toMatchObject(getOperation('dontConvert'));
