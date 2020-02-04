@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "jest": "^25.1.0",
     "mock-fs": "^4.10.3",
     "npm-watch": "^0.6.0",
     "typescript": "^3.7.4"
