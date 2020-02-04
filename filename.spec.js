@@ -121,6 +121,9 @@ describe('filename', () => {
 		it('should tell if a gz file isSupportedArchive', () => {
 			expect(isSupportedArchive('gz')).toBe(true);
 		});
+		it('should tell if a eml file isSupportedArchive', () => {
+			expect(isSupportedArchive('eml')).toBe(true);
+		});
 	});
 
 
