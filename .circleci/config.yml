@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/file-system
+    working_directory: ~/musical-spoon
     docker:
       - image: circleci/node:12.13.0
 
@@ -13,7 +13,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: file-system-{{ checksum "package.json" }}
+          key: musical-spoon-{{ checksum "package.json" }}
 
       - run:
           name: Setup Environment Variables
@@ -21,9 +21,6 @@ jobs:
             echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
             echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
 
-      - run:
-          name: test show bash env var
-          command: echo "${TEST_ENV_VAR}"
 
       - run:
           name: npm install
@@ -34,23 +31,15 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: file-system-{{ checksum "package.json" }}
-
-      - run:
-          name: test-setup
-          command: |
-            $(cat skip_full_build.txt)
-            mkdir -p ~/tests/xunit
-            node -v
-            npm -v
+          key: musical-spoon-{{ checksum "package.json" }}
 
 
       - run:
           name: test
-          command: |
-            $(cat skip_full_build.txt)
-            npm test
+          command: yarn test
+
       - setup_remote_docker
+
 
       - run:
           name: Install awscli
@@ -68,15 +57,10 @@ jobs:
             sudo mv kubectl /usr/local/bin/kubectl
 
       - run:
-          name: install libreoffice
-          command: |
-            sudo apt-get --no-install-recommends install libreoffice
-
-      - run:
           name: Docker publish
           command: |
             # Generate the image name
-            IMAGE_NAME=${AWS_REG_URL}/filesystem:$(node change-ver.js ${CIRCLE_BUILD_NUM} ${CIRCLE_BRANCH}) # Generate the change cause (for rollout history)
+            IMAGE_NAME=${AWS_REG_URL}/musicalspoon:$(node change-ver.js ${CIRCLE_BUILD_NUM} ${CIRCLE_BRANCH}) # Generate the change cause (for rollout history)
             CHANGE_CAUSE="Build: "${CIRCLE_BUILD_NUM}"; Branch: "${CIRCLE_BRANCH}
             # Print the image name for reference
             echo 'Image: '${IMAGE_NAME}
