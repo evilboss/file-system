@@ -85,6 +85,9 @@ describe('filename', () => {
 		it('should getFile of a normal file', () => {
 			expect(isDefaultFormats('jpg')).toBe(true);
 		});
+		it('should getFile of a normal file', () => {
+			expect(isDefaultFormats('csv')).toBe(false);
+		});
 	});
 
 
