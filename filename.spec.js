@@ -73,27 +73,27 @@ describe('filename', () => {
 
 	});
 	describe('isDefaultFormats', () => {
-		it('should getFile of a normal file', () => {
+		it('should tell if a file isDefaultFormats of a pdf file', () => {
 			expect(isDefaultFormats('pdf')).toBe(true);
 		});
-		it('should getFile of a normal file', () => {
+		it('should tell if a file isDefaultFormats of a psd file', () => {
 			expect(isDefaultFormats('psd')).toBe(true);
 		});
-		it('should getFile of a normal file', () => {
+		it('should tell if a file isDefaultFormats of a png file', () => {
 			expect(isDefaultFormats('png')).toBe(true);
 		});
-		it('should getFile of a normal file', () => {
+		it('should tell if a file isDefaultFormats of a jpg file', () => {
 			expect(isDefaultFormats('jpg')).toBe(true);
 		});
-		it('should getFile of a normal file', () => {
+		it('should tell if a file isDefaultFormats of a csv file', () => {
 			expect(isDefaultFormats('csv')).toBe(false);
 		});
 	});
 	describe('isSupportedFileFormats', () => {
-		it('should getFile of a normal file', () => {
+		it('should tell if file is isSupportedFileFormats pdf file', () => {
 			expect(isSupportedFileFormats('pdf')).toBe(true);
 		});
-		it('should getFile of a normal file', () => {
+		it('should tell if file is isSupportedFileFormats png file', () => {
 			expect(isSupportedFileFormats('png')).toBe(true);
 		});
 	});
