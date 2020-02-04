@@ -97,7 +97,7 @@ describe('filename', () => {
 			expect(isSupportedFileFormats('png')).toBe(true);
 		});
 		it('should tell if file is isSupportedFileFormats of a exe file', () => {
-			expect(isSupportedFileFormats('exe')).toBe(true);
+			expect(isSupportedFileFormats('exe')).toBe(false);
 		});
 	});
 
