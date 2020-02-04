@@ -102,6 +102,7 @@ describe('filename', () => {
 	});
 
 	describe('isSupportedArchive', () => {
+		expect(isSupportedArchive('zip')).toBe(true);
 
 	});
 
