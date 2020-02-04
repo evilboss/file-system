@@ -115,7 +115,9 @@ describe('filename', () => {
 			expect(isSupportedArchive('7z')).toBe(true);
 		});
 
-
+		it('should tell if a tar file isSupportedArchive', () => {
+			expect(isSupportedArchive('tar')).toBe(true);
+		});
 	});
 
 
