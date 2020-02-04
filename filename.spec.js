@@ -82,6 +82,9 @@ describe('filename', () => {
 		it('should getFile of a normal file', () => {
 			expect(isDefaultFormats('png')).toBe(true);
 		});
+		it('should getFile of a normal file', () => {
+			expect(isDefaultFormats('jpg')).toBe(true);
+		});
 	});
 
 
