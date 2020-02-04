@@ -10,6 +10,9 @@ describe('operations', () => {
 		it('Should be fileOperations.extract', () => {
 			expect(fileOperations.extract()).toMatchObject(getOperation('extract'));
 		});
+		it('Should be fileOperations.convert', () => {
+			expect(fileOperations.convert()).toMatchObject(getOperation('extract'));
+		});
 
 	});
 
