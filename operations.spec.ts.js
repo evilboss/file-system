@@ -7,6 +7,9 @@ describe('operations', () => {
 		it('Should be getOperation convert', () => {
 			expect(getOperation('convert')).toMatchObject(fileOperations.convert());
 		});
+		it('Should be getOperation dontConvert', () => {
+			expect(getOperation('dontConvert')).toMatchObject(fileOperations.dontConvert());
+		});
 
 
 	});
