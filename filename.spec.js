@@ -72,6 +72,11 @@ describe('filename', () => {
 		});
 
 	});
+	describe('isDefaultFormats', () => {
+		it('should getFile of a normal file', () => {
+			expect(isDefaultFormats('pdf')).toBe(true);
+		});
+	});
 
 
 
