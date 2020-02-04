@@ -4,7 +4,11 @@ const {
 	isSupported,
 	generatefileName,
 	renameFile,
-	getFile
+	getFile,
+	isDefaultFormats,
+	isSupportedFileFormats,
+	isSupportedArchive,
+	isCSVFile
 } = require('./filename');
 describe('filename', () => {
 	describe('getfilename', () => {
@@ -31,16 +35,31 @@ describe('filename', () => {
 	});
 	describe('generatefileName', () => {
 		it('should get generatefileName of a normal file', () => {
-			expect(generatefileName('file.pdf','recliame4amazon')).toBe('recliame4amazon/file.pdf');
+			expect(generatefileName('file.pdf', 'recliame4amazon')).toBe('recliame4amazon/file.pdf');
 		});
 
 		it('should get generatefileName of file with multiple dot file', () => {
-			expect(generatefileName('sample.somedir.somefile.pdf','recliame4amazon')).toBe('recliame4amazon/sample.somedir.somefile.pdf');
+			expect(generatefileName('sample.somedir.somefile.pdf', 'recliame4amazon')).toBe('recliame4amazon/sample.somedir.somefile.pdf');
 		});
 		it('should get generatefileName of file with multiple slashes file', () => {
-			expect(generatefileName('sample/somedir/somefile.pdf','recliame4amazon')).toBe('recliame4amazon/sample_somedir_somefile.pdf');
+			expect(generatefileName('sample/somedir/somefile.pdf', 'recliame4amazon')).toBe('recliame4amazon/sample_somedir_somefile.pdf');
 		});
 
 	});
+	describe('getFile', () => {
+		it('should getFile of a normal file', () => {
+			expect(getFile('file.pdf', 'recliame4amazon')).toBe('file.pdf');
+		});
+
+		it('should get generatefileName of file with multiple dot file', () => {
+			expect(getFile('sample.somedir.somefile.pdf', 'recliame4amazon')).toBe('sample.somedir.somefile.pdf');
+		});
+		it('should get generatefileName of file with multiple slashes file', () => {
+			expect(getFile('sample/somedir/somefile.pdf', 'recliame4amazon')).toBe('somefile.pdf');
+		});
+
+	});
+
+
 
 });

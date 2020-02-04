@@ -53,5 +53,9 @@ module.exports = {
 	isSupported,
 	generatefileName,
 	renameFile,
-	getFile
+	getFile,
+	isDefaultFormats,
+	isSupportedFileFormats,
+	isSupportedArchive,
+	isCSVFile
 };
