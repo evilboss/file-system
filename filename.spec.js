@@ -118,6 +118,9 @@ describe('filename', () => {
 		it('should tell if a tar file isSupportedArchive', () => {
 			expect(isSupportedArchive('tar')).toBe(true);
 		});
+		it('should tell if a gz file isSupportedArchive', () => {
+			expect(isSupportedArchive('gz')).toBe(true);
+		});
 	});
 
 
