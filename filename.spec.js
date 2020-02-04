@@ -25,5 +25,9 @@ describe('filename', () => {
 		});
 
 	});
+	describe('isSupported', () => {
+
+
+	});
 
 });
