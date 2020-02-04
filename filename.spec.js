@@ -93,7 +93,9 @@ describe('filename', () => {
 		it('should getFile of a normal file', () => {
 			expect(isSupportedFileFormats('pdf')).toBe(true);
 		});
-
+		it('should getFile of a normal file', () => {
+			expect(isSupportedFileFormats('png')).toBe(true);
+		});
 	});
 
 
