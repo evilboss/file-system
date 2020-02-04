@@ -19,7 +19,9 @@ describe('operations', () => {
 		it('Should be fileOperations.uploadToFurtherProcessing', () => {
 			expect(fileOperations.uploadToFurtherProcessing()).toMatchObject(getOperation('uploadToFurtherProcessing'));
 		});
-
+		it('Should be fileOperations.unsupported', () => {
+			expect(fileOperations.uploadToFurtherProcessing()).toMatchObject(getOperation('unsupported'));
+		});
 	});
 
 });
