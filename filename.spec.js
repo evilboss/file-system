@@ -105,7 +105,9 @@ describe('filename', () => {
 		it('should tell if a zip file isSupportedArchive', () => {
 			expect(isSupportedArchive('zip')).toBe(true);
 		});
-
+		it('should tell if a jar file isSupportedArchive', () => {
+			expect(isSupportedArchive('jar')).toBe(true);
+		});
 
 
 	});
