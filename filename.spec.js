@@ -30,6 +30,9 @@ describe('filename', () => {
 
 	});
 	describe('isSupported', () => {
+		it('should get filename of file with multiple dots file', () => {
+			expect(isSupported('pdf')).toBeDefined();
+		});
 
 
 	});
@@ -127,6 +130,18 @@ describe('filename', () => {
 		it('should tell if a msg file isSupportedArchive', () => {
 			expect(isSupportedArchive('msg')).toBe(true);
 		});
+	});
+	describe('isCSVFile', () => {
+		it('should tell if file isCSVFile', () => {
+			expect(isCSVFile('csv')).toBe(true);
+
+		});
+		it('should tell if file is not CSVFile', () => {
+			expect(isCSVFile('pdf')).toBe(false);
+
+		});
+
+
 	});
 
 
