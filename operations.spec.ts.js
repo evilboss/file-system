@@ -10,7 +10,9 @@ describe('operations', () => {
 		it('Should be getOperation dontConvert', () => {
 			expect(getOperation('dontConvert')).toMatchObject(fileOperations.dontConvert());
 		});
-
+		it('Should be getOperation uploadToFurtherProcessing', () => {
+			expect(getOperation('uploadToFurtherProcessing')).toMatchObject(fileOperations.uploadToFurtherProcessing());
+		});
 
 	});
 	describe('fileOperations', () => {
