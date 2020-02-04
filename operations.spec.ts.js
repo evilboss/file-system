@@ -16,6 +16,9 @@ describe('operations', () => {
 		it('Should be fileOperations.dontConvert', () => {
 			expect(fileOperations.dontConvert()).toMatchObject(getOperation('dontConvert'));
 		});
+		it('Should be fileOperations.uploadToFurtherProcessing', () => {
+			expect(fileOperations.uploadToFurtherProcessing()).toMatchObject(getOperation('uploadToFurtherProcessing'));
+		});
 
 	});
 
