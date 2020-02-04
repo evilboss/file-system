@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // @ts-ignore
 const AWS = require('aws-sdk');
 // @ts-ignore
