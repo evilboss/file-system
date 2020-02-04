@@ -52,4 +52,4 @@ const getOperation = (ext) => {
 	// @ts-ignore
 	return fileOperations[ext];
 };
-module.exports = {getOperation};
+module.exports = {getOperation, fileOperations};
