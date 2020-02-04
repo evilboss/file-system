@@ -108,6 +108,9 @@ describe('filename', () => {
 		it('should tell if a jar file isSupportedArchive', () => {
 			expect(isSupportedArchive('jar')).toBe(true);
 		});
+		it('should tell if a rar file isSupportedArchive', () => {
+			expect(isSupportedArchive('rar')).toBe(true);
+		});
 
 
 	});
