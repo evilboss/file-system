@@ -6,5 +6,11 @@ describe('operations', () => {
 		});
 
 	});
+	describe('fileOperations', () => {
+		it('Should be fileOperations.extract', () => {
+			expect(fileOperations.extract()).toMatchObject(getOperation('extract'));
+		});
+
+	});
 
 });
