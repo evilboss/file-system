@@ -7,6 +7,7 @@
     "jest": "^25.1.0",
     "mock-fs": "^4.10.3",
     "npm-watch": "^0.6.0",
+    "ts-jest": "^25.2.0",
     "typescript": "^3.7.4"
   },
   "bin": {
@@ -23,7 +24,8 @@
   "scripts": {
     "startprocessing": "npm run build:processing && node src/processing/processing.js",
     "build:processing": "tsc src/processing/*.ts",
-    "run:processing": "npm-watch startprocessing"
+    "run:processing": "npm-watch startprocessing",
+    "test": "jest --forceExit --coverage --verbose --detectOpenHandles"
   },
   "dependencies": {
     "all-unpacker": "^0.1.3",
