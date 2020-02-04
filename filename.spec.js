@@ -89,6 +89,12 @@ describe('filename', () => {
 			expect(isDefaultFormats('csv')).toBe(false);
 		});
 	});
+	describe('isSupportedFileFormats', () => {
+		it('should getFile of a normal file', () => {
+			expect(isSupportedFileFormats('pdf')).toBe(true);
+		});
+
+	});
 
 
 
