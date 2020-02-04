@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // @ts-ignore
 const _ = require('lodash');
 // @ts-ignore
