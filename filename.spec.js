@@ -59,6 +59,19 @@ describe('filename', () => {
 		});
 
 	});
+	describe('renameFile', () => {
+		it('should getFile of a normal file', () => {
+			expect(renameFile('file.pdf', 'recliame4amazon')).toBe('recliame4amazon/file.pdf');
+		});
+
+		it('should get generatefileName of file with multiple dot file', () => {
+			expect(renameFile('sample.somedir.somefile.pdf', 'recliame4amazon')).toBe('recliame4amazon/sample.somedir.somefile.pdf');
+		});
+		it('should get generatefileName of file with multiple slashes file', () => {
+			expect(renameFile('sample/somedir/somefile.pdf', 'recliame4amazon')).toBe('recliame4amazon/sample_somedir_somefile.pdf');
+		});
+
+	});
 
 
 
