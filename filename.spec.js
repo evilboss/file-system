@@ -101,6 +101,9 @@ describe('filename', () => {
 		});
 	});
 
+	describe('isSupportedArchive', () => {
+
+	});
 
 
 });
