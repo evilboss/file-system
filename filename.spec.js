@@ -111,6 +111,9 @@ describe('filename', () => {
 		it('should tell if a rar file isSupportedArchive', () => {
 			expect(isSupportedArchive('rar')).toBe(true);
 		});
+		it('should tell if a 7z file isSupportedArchive', () => {
+			expect(isSupportedArchive('7z')).toBe(true);
+		});
 
 
 	});
