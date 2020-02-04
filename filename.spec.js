@@ -76,6 +76,9 @@ describe('filename', () => {
 		it('should getFile of a normal file', () => {
 			expect(isDefaultFormats('pdf')).toBe(true);
 		});
+		it('should getFile of a normal file', () => {
+			expect(isDefaultFormats('psd')).toBe(true);
+		});
 	});
 
 
