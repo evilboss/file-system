@@ -36,6 +36,20 @@ jobs:
             - node_modules
           key: file-system-{{ checksum "package.json" }}
 
+      - run:
+          name: test-setup
+          command: |
+            $(cat skip_full_build.txt)
+            mkdir -p ~/tests/xunit
+            node -v
+            npm -v
+
+
+      - run:
+          name: test
+          command: |
+            $(cat skip_full_build.txt)
+            npm test
       - setup_remote_docker
 
       - run:
