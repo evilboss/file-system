@@ -41,10 +41,6 @@ describe('filename', () => {
 			expect(generatefileName('sample/somedir/somefile.pdf','recliame4amazon')).toBe('recliame4amazon/sample_somedir_somefile.pdf');
 		});
 
-
-
-
 	});
-
 
 });
