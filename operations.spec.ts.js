@@ -13,6 +13,9 @@ describe('operations', () => {
 		it('Should be fileOperations.convert', () => {
 			expect(fileOperations.convert()).toMatchObject(getOperation('extract'));
 		});
+		it('Should be fileOperations.dontConvert', () => {
+			expect(fileOperations.dontConvert()).toMatchObject(getOperation('dontConvert'));
+		});
 
 	});
 
