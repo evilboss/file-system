@@ -124,6 +124,9 @@ describe('filename', () => {
 		it('should tell if a eml file isSupportedArchive', () => {
 			expect(isSupportedArchive('eml')).toBe(true);
 		});
+		it('should tell if a msg file isSupportedArchive', () => {
+			expect(isSupportedArchive('msg')).toBe(true);
+		});
 	});
 
 
