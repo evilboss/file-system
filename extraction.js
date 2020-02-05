@@ -1,11 +1,15 @@
 /* istanbul ignore file */
 // @ts-ignore
 const _ = require('lodash');
+// @ts-ignore
+const fs = require('fs');
+// @ts-ignore
 const ua = require('./unar');
 // @ts-ignore
 const {uploadFile} = require('./uploader');
+// @ts-ignore
 const {INCOMING_SECONDARY_FOLDER} = process.env;
-const outputdir = './storage/extract/';
+const outputdir = './storage/';
 // @ts-ignore
 const listAll = (target) => {
 	return new Promise((resolve, reject) => {
@@ -15,6 +19,29 @@ const listAll = (target) => {
 		})
 	})
 };
+// @ts-ignore
+const forEachPromise = (items, file, account, fn, context) => {
+	// @ts-ignore
+	return items.reduce((promise, item) => promise.then(() => fn(item, file, account, context)), Promise.resolve());
+};
+
+// @ts-ignore
+const logItem = (item, file, account) => new Promise((resolve, reject) => {
+	const {getFileExtension, renameFile} = require('./filename');
+
+	process.nextTick(() => {
+		if (!getFileExtension(item).includes('/')) {
+			unpackOne(file, outputdir, item).then((payload) => {
+				uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`, 'ingestion-ph-dev-secondary');
+			}).then(() => {
+				resolve();
+			}).catch(err => console.error(err));
+		} else {
+			resolve();
+		}
+
+	})
+});
 // @ts-ignore
 const unpackOne = (target, output, file) => {
 	return new Promise((resolve, reject) => {
@@ -40,25 +67,30 @@ const unpackOne = (target, output, file) => {
 };
 // @ts-ignore
 const extractFiles = (file, account) => {
+	// @ts-ignore
 	const {getFileExtension, renameFile} = require('./filename');
-
-	listAll(file).then((result => {
+	return new Promise((resolve, reject) => {
 		// @ts-ignore
-		_.each(result, (item, key) => {
-			if (!getFileExtension(item).includes('/')) {
-				unpackOne(file, outputdir, item).then((payload) => {
-					uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`, 'ingestion-ph-dev-secondary');
-				}).catch(err => console.error(err));
-			}
+		listAll(file).then((items => {
+			// @ts-ignore
+			forEachPromise(items, file, account, logItem).then((done) => {
+				// @ts-ignore
+				fs.unlink(file, err => {
+					if (err) reject(err); else {
+						resolve('done');
+						console.log(`removed ${file} on local storage`);
+					}
+					// if no error, file has been deleted successfully
+				});
 
-		})
-	})).catch(error => console.error(error)).finally(() => {
-		return new Promise((resolve, reject) => {
-			resolve('ok');
+			});
+		})).catch(error => reject(error))
+			// @ts-ignore
+			.finally((status) => {
+				console.log('finally', status);
+			});
+	});
 
-		})
-	})
-	;
 };
 module.exports = {
 	extractFiles

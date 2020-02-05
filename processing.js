@@ -8,6 +8,9 @@ const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
 const {imaginary} = require('./imaginary');
+// @ts-ignore
+
+const {INCOMING_SECONDARY_FOLDER} = process.env;
 
 // @ts-ignore
 const decideFileProcess = (target) => {
@@ -23,12 +26,10 @@ const decideFileProcess = (target) => {
 
 // @ts-ignore
 const processFile = (file, account) => {
-		decideFileProcess(file).then(operation => {
+	decideFileProcess(file).then(operation => {
 		// @ts-ignore
 		operation(file, account).then((payload) => {
 			if (payload && payload.filename) {
-
-
 				// @ts-ignore
 				if (payload.imaginary) imaginary.uploadFile(payload.filename, renameFile(payload.filename, account)).then(file => {
 					console.log(`uploaded ${file} to imaginary`);
@@ -40,9 +41,7 @@ const processFile = (file, account) => {
 						// if no error, file has been deleted successfully
 					});
 				}); else {
-					console.log(`upload to ${payload.folder}`);
 					uploadFile(payload.filename, `${payload.folder}/${renameFile(payload.filename, account)}`, payload.bucket);
-
 				}
 
 			}
@@ -62,4 +61,4 @@ const processFile = (file, account) => {
 * */
 
 
-processFile('./testStorage/DATA_Ingestion/GIF.gif', "CoronaVirus");
+processFile('./storage/compressed.7z', "CoronaVirus");
