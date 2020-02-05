@@ -2,6 +2,8 @@
 // @ts-ignore
 const _ = require('lodash');
 // @ts-ignore
+const fs = require('fs');
+// @ts-ignore
 const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
@@ -20,20 +22,24 @@ const decideFileProcess = (target) => {
 };
 
 // @ts-ignore
-const process = (file, account) => {
-
-	decideFileProcess(file).then(operation => {
+const processFile = (file, account) => {
+		decideFileProcess(file).then(operation => {
 		// @ts-ignore
 		operation(file, account).then((payload) => {
-			console.log(payload);
 			if (payload && payload.filename) {
 
-				if (payload.imaginary) {
-					imaginary.uploadFile(payload.filename, renameFile(payload.filename, account));
-					console.log('upload to imaginary');
 
-
-				} else {
+				// @ts-ignore
+				if (payload.imaginary) imaginary.uploadFile(payload.filename, renameFile(payload.filename, account)).then(file => {
+					console.log(`uploaded ${file} to imaginary`);
+					// @ts-ignore
+					fs.unlink(file, err => {
+						if (err) throw err; else {
+							console.log(`removed ${file} on local storage`);
+						}
+						// if no error, file has been deleted successfully
+					});
+				}); else {
 					console.log(`upload to ${payload.folder}`);
 					uploadFile(payload.filename, `${payload.folder}/${renameFile(payload.filename, account)}`, payload.bucket);
 
@@ -51,10 +57,9 @@ const process = (file, account) => {
 
 /*
 *  USAGE:
-*  process('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
+*  processFile('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
 
 
-process('./testStorage/DATA_Ingestion/data.csv', "CoronaVirus");
-process('./testStorage/DATA_Ingestion/GIF.gif', "CoronaVirus");
+processFile('./testStorage/DATA_Ingestion/GIF.gif', "CoronaVirus");

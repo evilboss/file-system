@@ -6,7 +6,8 @@ const {conversion} = require('./conversion');
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
 // @ts-ignore
 const {extractFiles} = require('./extraction');
-const {OUTGOING_FOLDER} = process.env;
+const {NODE_ENV, OUTGOING_FOLDER} = process.env;
+// @ts-ignore
 const fileOperations = {
 	// @ts-ignore
 	extract: (file, accountName) => {
@@ -19,9 +20,21 @@ const fileOperations = {
 	convert: (file) => {
 		return new Promise(((resolve, reject) => {
 			conversion(file).then(result => {
+				return (result);
+			}).then((result) => {
+				if (NODE_ENV !== 'local') {
+					// @ts-ignore
+					fs.unlink(file, err => {
+						if (err) throw err; else {
+							console.log(`removed ${file} on local storage`);
+						}
+						// if no error, file has been deleted successfully
+					});
+				}
 				resolve(result);
 			}).catch(error => {
-				console.error(error)
+
+				reject(error);
 			})
 		}));
 	},
@@ -52,4 +65,4 @@ const getOperation = (ext) => {
 	// @ts-ignore
 	return fileOperations[ext];
 };
-module.exports = {getOperation, fileOperations};
+module.exports = {getOperation};
