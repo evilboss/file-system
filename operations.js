@@ -6,6 +6,7 @@ const {conversion} = require('./conversion');
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
 // @ts-ignore
 const {extractFiles} = require('./extraction');
+// @ts-ignore
 const {NODE_ENV, OUTGOING_FOLDER} = process.env;
 // @ts-ignore
 const fileOperations = {
