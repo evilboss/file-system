@@ -8,7 +8,7 @@ const logItem = item => new Promise((resolve, reject) => {
 });
 const forEachPromise = (items, fn, context) => {
 	return items.reduce((promise, item) => promise.then(() => fn(item, context)), Promise.resolve());
-}
+};
 forEachPromise(items, logItem).then((done) => {
 	console.log('done');
 });
