@@ -78,33 +78,40 @@ const extractFiles = (file, account) => {
 	const {getFileExtension, renameFile} = require('./filename');
 	return new Promise((resolve, reject) => {
 		// @ts-ignore
-		listAll(file).then((items => {
-			// @ts-ignore
-			forEachPromise(items, file, account, logItem).then((done) => {
-				// @ts-ignore
-				/*fs.unlink(file, err => {
-					if (err) reject(err); else {
-						console.log(`removed ${file} on local storage`);
-					}
-					// if no error, file has been deleted successfully
-				});*/
-				fse.remove(file)
-					.then(() => {
-						console.log(`removed ${file} on local storage`);
-					})
-					.catch(err => {
-						console.error(err)
-					})
-				fse.remove(`${outputdir}/${_.last(items)}`)
-					.then(() => {
-						console.log(`success! removed ${outputdir}/${_.last(items)} directory on local storage`)
-					})
-					.catch(err => {
-						console.error(err)
-					})
+		fse.pathExists(file)
+			.then(exists => {
+				if (exists) {
+					listAll(file).then((items => {
+						// @ts-ignore
+						forEachPromise(items, file, account, logItem).then((done) => {
+							// @ts-ignore
+							/*fs.unlink(file, err => {
+								if (err) reject(err); else {
+									console.log(`removed ${file} on local storage`);
+								}
+								// if no error, file has been deleted successfully
+							});*/
+							fse.remove(file)
+								.then(() => {
+									console.log(`removed ${file} on local storage`);
+								})
+								.catch(err => {
+									console.error(err)
+								})
+							fse.remove(`${outputdir}/${_.last(items)}`)
+								.then(() => {
+									console.log(`success! removed ${outputdir}/${_.last(items)} directory on local storage`)
+								})
+								.catch(err => {
+									console.error(err)
+								})
 
-			});
-		})).catch(error => reject(error));
+						});
+					})).catch(error => reject(error));
+
+				}
+			}) // => false
+
 
 	});
 

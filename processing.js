@@ -52,6 +52,8 @@ const processFile = (file, account) => {
 	}).catch(error => {
 		console.error(error)
 	});
+
+
 };
 
 /*
@@ -61,4 +63,4 @@ const processFile = (file, account) => {
 * */
 
 
-processFile('./storage/ZIPS_Zip1.zip', "CoronaVirus");
+processFile('./storage/ZIP.zip', "CoronaVirus");
