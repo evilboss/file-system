@@ -25,7 +25,7 @@
     "startprocessing": "npm run build:processing && node src/processing/processing.js",
     "build:processing": "tsc src/processing/*.ts",
     "run:processing": "npm-watch startprocessing",
-    "test": "jest --forceExit --coverage --verbose --detectOpenHandles"
+    "test": "jest --forceExit --coverage --verbose --detectOpenHandles --outputFile=results.xml"
   },
   "dependencies": {
     "all-unpacker": "^0.1.3",
