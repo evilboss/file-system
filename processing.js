@@ -61,4 +61,4 @@ const processFile = (file, account) => {
 * */
 
 
-processFile('./storage/compressed.7z', "CoronaVirus");
+processFile('./storage/ZIPS_Zip1.zip', "CoronaVirus");

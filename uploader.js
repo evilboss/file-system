@@ -36,23 +36,26 @@ const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 
 	// Uploading files to the bucket
 	// @ts-ignore
-	console.log(targetFile, fileName);
-	if (NODE_ENV !== 'local') {
-		s3.upload(params, (err, data) => {
-			if (err) {
-				throw err;
-			} else {
+	return new Promise((resolve, reject) => {
+		console.log(targetFile, fileName);
+		if (NODE_ENV !== 'local') {
+
+			s3.upload(params, (err, data) => {
+				if (err) reject(err);
 				// @ts-ignore
 				fs.unlink(targetFile, err => {
-					if (err) throw err;
+					if (err) reject(err);
 					// if no error, file has been deleted successfully
 				});
 				console.log(`File uploaded successfully. ${data.Location}`);
-			}
+				resolve(`File uploaded successfully. ${data.Location}`);
 
-		});
 
-	}
+			});
+
+		}
+	});
+
 };
 //usage
 /*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
