@@ -13,9 +13,11 @@ const getFile = (filename) => {
 
 };
 const generatefileName = (file, accountName) => {
-	return `${accountName}/${file.replace(/\//g, '_').replace(/ /g, '').trim()}`;
+	console.log(file);
+	return `${(accountName) ? accountName`/` : ''}${(file.replace(/\//g, '_').replace(/ /g, '').trim()).replace('_', '')}`;
 
 };
+
 const renameFile = (file, account) => {
 	return (`${generatefileName(getFilename(file).replace('/convert/', '').replace('/extract/', ''), account)}.${getFileExtension(file)}`);
 };

@@ -1,2 +1,2 @@
-const {generatefileName} = require('./filename');
-console.log(generatefileName('/home/jr/Projects/yngen/rnd/file-system/filename.js',''));
+const {getFile} = require('./filename');
+console.log(getFile('/home/jr/Projects/yngen/rnd/file-system/filename.js'));
