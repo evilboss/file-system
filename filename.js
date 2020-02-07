@@ -13,7 +13,6 @@ const getFile = (filename) => {
 
 };
 const generatefileName = (file, accountName) => {
-	console.log(file);
 	return `${(accountName) ? accountName`/` : ''}${(file.replace(/\//g, '_').replace(/ /g, '').trim()).replace('_', '')}`;
 
 };
