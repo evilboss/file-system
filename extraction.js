@@ -32,7 +32,8 @@ const logItem = (item, file, account) => new Promise((resolve, reject) => {
 	process.nextTick(() => {
 		if (!getFileExtension(item).includes('/')) {
 			unpackOne(file, outputdir, item).then((payload) => {
-				uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`, 'ingestion-ph-dev-secondary');
+				console.log(`${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`);
+				//uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`);
 			}).then(() => {
 				resolve();
 			}).catch(err => console.error(err));
@@ -48,9 +49,10 @@ const unpackOne = (target, output, file) => {
 		ua.unpack(target, {
 			archiveFile: target,
 			targetDir: output,
-			files: file,
 			quiet: true,
 			forceOverwrite: true,
+			noDirectory: true,
+			files: file,
 // @ts-ignore
 		}, (err, files, info) => {
 			if (err) {
@@ -73,15 +75,15 @@ const extractFiles = (file, account) => {
 		// @ts-ignore
 		listAll(file).then((items => {
 			// @ts-ignore
-			forEachPromise(items, file, account, logItem).then((done) => {
+			forEachPromise(items, file, account, logItem).then(() => {
 				// @ts-ignore
-				fs.unlink(file, err => {
+				/*fs.unlink(file, err => {
 					if (err) reject(err); else {
 						resolve('done');
 						console.log(`removed ${file} on local storage`);
 					}
 					// if no error, file has been deleted successfully
-				});
+				});*/
 
 			});
 		})).catch(error => reject(error))

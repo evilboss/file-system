@@ -13,7 +13,8 @@ const getFile = (filename) => {
 
 };
 const generatefileName = (file, accountName) => {
-	return `${(accountName) ? accountName`/` : ''}${(file.replace(/\//g, '_').replace(/ /g, '').trim()).replace('_', '')}`;
+	const addFolder = (accountName !== undefined) ? `${accountName}/` : '';
+	return `${addFolder}${(file.replace(/\//g, '_').replace(/ /g, '').trim()).replace('_', '')}`;
 
 };
 
