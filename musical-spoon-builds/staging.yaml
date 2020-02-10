@@ -42,7 +42,7 @@ spec:
   template:
     metadata:
       annotations:
-        kubernetes.io/change-cause: 'Build: 117; Branch: master'
+        kubernetes.io/change-cause: 'Build: 120; Branch: master'
       labels:
         app: musical-spoon
         env: staging
@@ -73,7 +73,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-          image: 395499912268.dkr.ecr.eu-west-1.amazonaws.com/musicalspoon:1.0.117
+          image: 395499912268.dkr.ecr.eu-west-1.amazonaws.com/musicalspoon:1.0.120
           name: musical-spoon
           ports:
             - containerPort: 3000
