@@ -12,6 +12,7 @@ const {INCOMING_SECONDARY_FOLDER} = process.env;
 const outputdir = './storage/';
 // @ts-ignore
 const listAll = (target) => {
+    // @ts-ignore
     return new Promise((resolve, reject) => {
         // @ts-ignore
         ua.list(target, {quiet: true}, (error, files) => {
