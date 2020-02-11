@@ -41,6 +41,8 @@ const fileOperations = {
     },
     // @ts-ignore
     dontConvert: (file) => {
+        // @ts-ignore
+
         return new Promise(
             (resolve) => {
                 resolve({filename: file, imaginary: true});
