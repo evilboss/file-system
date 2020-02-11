@@ -44,6 +44,7 @@ const logItem = (item, file, account) => new Promise((resolve, reject) => {
 });
 // @ts-ignore
 const unpackOne = (target, output, file) => {
+    // @ts-ignore
     return new Promise((resolve, reject) => {
         ua.unpack(target, {
             archiveFile: target,
