@@ -28,6 +28,8 @@ const forEachPromise = (items, file, account, fn, context) => {
 
 // @ts-ignore
 const logItem = (item, file, account) => new Promise((resolve, reject) => {
+    // @ts-ignore
+
     const {getFileExtension, renameFile} = require('./filename');
 // @ts-ignore
 
