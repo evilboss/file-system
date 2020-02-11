@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // @ts-ignore
 const fs = require('fs');
 // @ts-ignore
