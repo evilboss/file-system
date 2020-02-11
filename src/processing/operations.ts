@@ -21,6 +21,7 @@ const fileOperations = {
     },
     // @ts-ignore
     convert: (file) => {
+        // @ts-ignore
         return new Promise(((resolve, reject) => {
             conversion(file).then(result => {
                 return (result);
