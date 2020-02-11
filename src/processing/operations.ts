@@ -72,4 +72,5 @@ const getOperation = (ext) => {
     // @ts-ignore
     return fileOperations[ext];
 };
+// @ts-ignore
 module.exports = {getOperation};
