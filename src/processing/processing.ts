@@ -7,6 +7,8 @@ const fs = require('fs');
 const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
+// @ts-ignore
+
 const {imaginary} = require('./imaginary');
 // @ts-ignore
 
