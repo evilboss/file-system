@@ -12,6 +12,8 @@ const {NODE_ENV, OUTGOING_FOLDER} = process.env;
 const fileOperations = {
     // @ts-ignore
     extract: (file, accountName) => {
+        // @ts-ignore
+
         return new Promise(((resolve, reject) => {
             extractFiles(file, accountName);
             resolve('ok');
