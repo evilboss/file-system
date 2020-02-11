@@ -1,9 +1,8 @@
+/* istanbul ignore file */
 // @ts-ignore
 const AWS = require('aws-sdk');
 // @ts-ignore
 const fs = require('fs');
-// @ts-ignore
-const config = require('./appConfig');
 // @ts-ignore
 const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, NODE_ENV} = process.env;
 const params = {
