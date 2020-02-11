@@ -14,6 +14,8 @@ const {INCOMING_SECONDARY_FOLDER} = process.env;
 
 // @ts-ignore
 const decideFileProcess = (target) => {
+    // @ts-ignore
+
     return new Promise(((resolve, reject) => {
         const operation = isSupported(getFileExtension(target));
         if (operation !== 'unsupported file') {
