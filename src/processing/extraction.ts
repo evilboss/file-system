@@ -29,6 +29,7 @@ const forEachPromise = (items, file, account, fn, context) => {
 // @ts-ignore
 const logItem = (item, file, account) => new Promise((resolve, reject) => {
     const {getFileExtension, renameFile} = require('./filename');
+// @ts-ignore
 
     process.nextTick(() => {
         if (!getFileExtension(item).includes('/')) {
