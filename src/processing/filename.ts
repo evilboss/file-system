@@ -1,7 +1,6 @@
 // @ts-ignore
 const _ = require('lodash');
-// @ts-ignore
-const {supportedFileFormats, supportedArchives} = require('./supportedfiles.json');
+const {supportedFileFormats, supportedArchives} = require('../../../supportedfiles.json');
 // @ts-ignore
 const {getOperation} = require('./operations');
 // @ts-ignore
