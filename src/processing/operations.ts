@@ -54,6 +54,8 @@ const fileOperations = {
     },
     // @ts-ignore
     unsupported: (file) => {
+        // @ts-ignore
+
         return new Promise(
             (resolve) => {
                 resolve({filename: '', bucket: ''});
