@@ -69,6 +69,7 @@ const unpackOne = (target, output, file) => {
 const extractFiles = (file, account) => {
     // @ts-ignore
     const {getFileExtension, renameFile} = require('./filename');
+    // @ts-ignore
     return new Promise((resolve, reject) => {
         // @ts-ignore
         listAll(file).then((items => {
