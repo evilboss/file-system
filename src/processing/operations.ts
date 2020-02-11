@@ -48,6 +48,8 @@ const fileOperations = {
     },
     // @ts-ignore
     uploadToFurtherProcessing: (file) => {
+        // @ts-ignore
+
         return new Promise(resolve => {
             resolve({filename: file, folder: OUTGOING_FOLDER})
         })
