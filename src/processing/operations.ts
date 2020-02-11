@@ -7,12 +7,11 @@ const {getFilename, getFileExtension, isSupported, generatefileName, renameFile}
 // @ts-ignore
 const {extractFiles} = require('./extraction');
 // @ts-ignore
-
-const {OUTGOING_FOLDER} = process.env;
+const {NODE_ENV, OUTGOING_FOLDER} = process.env;
+// @ts-ignore
 const fileOperations = {
     // @ts-ignore
     extract: (file, accountName) => {
-        // @ts-ignore
         return new Promise(((resolve, reject) => {
             extractFiles(file, accountName);
             resolve('ok');
@@ -20,18 +19,28 @@ const fileOperations = {
     },
     // @ts-ignore
     convert: (file) => {
-        // @ts-ignore
         return new Promise(((resolve, reject) => {
             conversion(file).then(result => {
+                return (result);
+            }).then((result) => {
+                if (NODE_ENV !== 'local') {
+                    // @ts-ignore
+                    fs.unlink(file, err => {
+                        if (err) throw err; else {
+                            console.log(`removed ${file} on local storage`);
+                        }
+                        // if no error, file has been deleted successfully
+                    });
+                }
                 resolve(result);
             }).catch(error => {
-                console.error(error)
+
+                reject(error);
             })
         }));
     },
     // @ts-ignore
     dontConvert: (file) => {
-        // @ts-ignore
         return new Promise(
             (resolve) => {
                 resolve({filename: file, imaginary: true});
@@ -39,14 +48,12 @@ const fileOperations = {
     },
     // @ts-ignore
     uploadToFurtherProcessing: (file) => {
-        // @ts-ignore
         return new Promise(resolve => {
             resolve({filename: file, folder: OUTGOING_FOLDER})
         })
     },
     // @ts-ignore
     unsupported: (file) => {
-        // @ts-ignore
         return new Promise(
             (resolve) => {
                 resolve({filename: '', bucket: ''});
@@ -59,5 +66,4 @@ const getOperation = (ext) => {
     // @ts-ignore
     return fileOperations[ext];
 };
-// @ts-ignore
 module.exports = {getOperation};
