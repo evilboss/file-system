@@ -18,7 +18,7 @@ const s3 = new AWS.S3({
 });
 
 // @ts-ignore
-const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
+const uploadFile = (targetFile, fileName) => {
     // Read content from the file
     if (!targetFile && !fileName) {
         console.error('targetFile and targetfilename required to upload file');
