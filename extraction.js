@@ -12,6 +12,8 @@ const {INCOMING_SECONDARY_FOLDER} = process.env;
 const outputdir = './storage/';
 // @ts-ignore
 const listAll = (target) => {
+	// @ts-ignore
+
 	return new Promise((resolve, reject) => {
 		// @ts-ignore
 		ua.list(target, {quiet: true}, (error, files) => {
@@ -27,7 +29,10 @@ const forEachPromise = (items, file, account, fn, context) => {
 
 // @ts-ignore
 const logItem = (item, file, account) => new Promise((resolve, reject) => {
+	// @ts-ignore
+
 	const {getFileExtension, renameFile} = require('./filename');
+// @ts-ignore
 
 	process.nextTick(() => {
 		if (!getFileExtension(item).includes('/')) {
@@ -44,6 +49,8 @@ const logItem = (item, file, account) => new Promise((resolve, reject) => {
 });
 // @ts-ignore
 const unpackOne = (target, output, file) => {
+	// @ts-ignore
+
 	return new Promise((resolve, reject) => {
 		ua.unpack(target, {
 			archiveFile: target,
@@ -70,6 +77,8 @@ const unpackOne = (target, output, file) => {
 const extractFiles = (file, account) => {
 	// @ts-ignore
 	const {getFileExtension, renameFile} = require('./filename');
+	// @ts-ignore
+
 	return new Promise((resolve, reject) => {
 		// @ts-ignore
 		listAll(file).then((items => {
@@ -94,6 +103,8 @@ const extractFiles = (file, account) => {
 	});
 
 };
+// @ts-ignore
+
 module.exports = {
 	extractFiles
 };
