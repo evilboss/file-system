@@ -1,41 +1,53 @@
+// @ts-ignore
 const _ = require('lodash');
-const {supportedFileFormats, supportedArchives} = require('./supportedfiles.json');
+const {supportedFileFormats, supportedArchives} = require('../../../supportedfiles.json');
+// @ts-ignore
 const {getOperation} = require('./operations');
+// @ts-ignore
 const getFileExtension = (filename) => {
 	return filename.split('.').pop();
 };
+// @ts-ignore
 const getFilename = (filename) => {
 	return filename.split('.').slice(0, -1).join('.').replace('./testStorage', '').replace('./storage', '').replace('./storage/convert', '');
 };
-
+// @ts-ignore
+const cleanFilename = (filename) => {
+	return filename.charAt(0) === '_' ? filename.substring(1) : filename;
+};
+// @ts-ignore
 const getFile = (filename) => {
 	return filename.replace(/^.*[\\\/]/, '');
 
 };
+// @ts-ignore
 const generatefileName = (file, accountName) => {
-	const addFolder = (accountName !== undefined) ? `${accountName}/` : '';
-	return `${addFolder}${(file.replace(/\//g, '_').replace(/ /g, '').trim()).replace('_', '')}`;
+	return `${accountName}/${cleanFilename(file.replace(/\//g, '_').replace(/ /g, '').trim())}`;
 
 };
-
+// @ts-ignore
 const renameFile = (file, account) => {
 	return (`${generatefileName(getFilename(file).replace('/convert/', '').replace('/extract/', ''), account)}.${getFileExtension(file)}`);
 };
-
+// @ts-ignore
 const isDefaultFormats = (ext) => {
 	const defaultFormats = ['jpg', 'psd', 'png', 'pdf'];
 	return (_.includes(defaultFormats, ext.toLowerCase()))
 };
+// @ts-ignore
 const isSupportedFileFormats = (ext) => {
 	return _.includes(supportedFileFormats, ext.toLowerCase());
 };
+// @ts-ignore
 const isSupportedArchive = (ext) => {
 	return (_.includes(supportedArchives, ext.toLowerCase()));
 };
+// @ts-ignore
 const isCSVFile = (ext) => {
 	return ext === 'csv';
 };
 
+// @ts-ignore
 const isSupported = (ext) => {
 	return (
 		isSupportedArchive(ext)) ?
@@ -55,9 +67,5 @@ module.exports = {
 	isSupported,
 	generatefileName,
 	renameFile,
-	getFile,
-	isDefaultFormats,
-	isSupportedFileFormats,
-	isSupportedArchive,
-	isCSVFile
+	getFile
 };
