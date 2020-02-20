@@ -18,7 +18,7 @@ const s3 = new AWS.S3({
 });
 
 // @ts-ignore
-const uploadFile = (targetFile, fileName) => {
+const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
     // Read content from the file
     if (!targetFile && !fileName) {
         console.error('targetFile and targetfilename required to upload file');
@@ -39,11 +39,11 @@ const uploadFile = (targetFile, fileName) => {
         // @ts-ignore
         s3.upload(params, (err, data) => {
             if (err) {
-                throw err;
+                console.error(err);
             } else {
                 // @ts-ignore
                 fs.unlink(targetFile, err => {
-                    if (err) throw err;
+                    if (err) console.error(err);
                     // if no error, file has been deleted successfully
                 });
                 console.log(`File uploaded successfully. ${data.Location}`);
@@ -57,4 +57,4 @@ const uploadFile = (targetFile, fileName) => {
 /*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
 */
 // @ts-ignore
-module.exports = {uploadFile};
+module.exports = {uploadFile: uploadFile};
