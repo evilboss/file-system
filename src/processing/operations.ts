@@ -1,6 +1,9 @@
 // @ts-ignore
 const _ = require('lodash');
 // @ts-ignore
+const fs = require('fs');
+
+// @ts-ignore
 const {conversion} = require('./conversion');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
@@ -22,6 +25,7 @@ const fileOperations = {
     // @ts-ignore
     convert: (file) => {
         // @ts-ignore
+
         return new Promise(((resolve, reject) => {
             conversion(file).then(result => {
                 return (result);
