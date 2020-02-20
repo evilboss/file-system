@@ -7,6 +7,8 @@ const fs = require('fs');
 const {uploadFile} = require('./uploader');
 // @ts-ignore
 const {getFilename, getFileExtension, isSupported, generatefileName, renameFile} = require('./filename');
+// @ts-ignore
+
 const {imaginary} = require('./imaginary');
 // @ts-ignore
 
@@ -14,6 +16,7 @@ const {INCOMING_SECONDARY_FOLDER} = process.env;
 
 // @ts-ignore
 const decideFileProcess = (target) => {
+	// @ts-ignore
 	return new Promise(((resolve, reject) => {
 		const operation = isSupported(getFileExtension(target));
 		if (operation !== 'unsupported file') {
@@ -53,6 +56,8 @@ const processFile = (file, account) => {
 		console.error(error)
 	});
 };
+// @ts-ignore
+
 module.exports = {
 	processFile
 };
