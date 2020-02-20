@@ -14,13 +14,17 @@ const getFilename = (filename) => {
     return filename.split('.').slice(0, -1).join('.').replace('./testStorage', '').replace('./storage', '').replace('./storage/convert', '');
 };
 // @ts-ignore
+const cleanFilename = (filename) => {
+    return filename.charAt(0) === '_' ? filename.substring(1) : filename;
+};
+// @ts-ignore
 const getFile = (filename) => {
     return filename.replace(/^.*[\\\/]/, '');
 
 };
 // @ts-ignore
 const generatefileName = (file, accountName) => {
-    return `${accountName}/${file.replace(/\//g, '_').replace(/ /g, '').trim()}`;
+    return `${accountName}/${cleanFilename(file.replace(/\//g, '_').replace(/ /g, '').trim())}`;
 
 };
 // @ts-ignore
@@ -59,6 +63,7 @@ const isSupported = (ext) => {
                 getOperation('unsupported');
 };
 // @ts-ignore
+
 module.exports = {
     getFilename,
     getFileExtension,
