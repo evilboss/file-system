@@ -31,8 +31,8 @@ const processFile = (file, account) => {
 		operation(file, account).then((payload) => {
 			if (payload && payload.filename) {
 				// @ts-ignore
-				if (payload.imaginary) imaginary.uploadFile(payload.filename, renameFile(payload.filename, account)).then(file => {
-					console.log(`uploaded ${file} to imaginary`);
+				if (payload.imaginary) imaginary.upload(payload.filename, renameFile(payload.filename, account)).then(file => {
+					console.log(`uploaded ${renameFile(payload.filename, account)} to imaginary`);
 					// @ts-ignore
 					fs.unlink(file, err => {
 						if (err) throw err; else {
@@ -52,15 +52,12 @@ const processFile = (file, account) => {
 	}).catch(error => {
 		console.error(error)
 	});
-
-
 };
-
+module.exports = {
+	processFile
+};
 /*
 *  USAGE:
 *  processFile('./testStorage/DATA_Ingestion/DOC.doc', "JLU");
 *
 * */
-
-
-processFile('./storage/ZIP.zip', "CoronaVirus");
