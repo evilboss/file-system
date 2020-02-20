@@ -13,6 +13,7 @@ const outputdir = './storage/';
 // @ts-ignore
 const listAll = (target) => {
     // @ts-ignore
+
     return new Promise((resolve, reject) => {
         // @ts-ignore
         ua.list(target, {quiet: true}, (error, files) => {
@@ -36,7 +37,7 @@ const logItem = (item, file, account) => new Promise((resolve, reject) => {
     process.nextTick(() => {
         if (!getFileExtension(item).includes('/')) {
             unpackOne(file, outputdir, item).then((payload) => {
-                uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`, 'ingestion-ph-dev-secondary');
+                uploadFile(payload, `${INCOMING_SECONDARY_FOLDER}/${renameFile(payload, account)}`);
             }).then(() => {
                 resolve();
             }).catch(err => console.error(err));
@@ -49,6 +50,7 @@ const logItem = (item, file, account) => new Promise((resolve, reject) => {
 // @ts-ignore
 const unpackOne = (target, output, file) => {
     // @ts-ignore
+
     return new Promise((resolve, reject) => {
         ua.unpack(target, {
             archiveFile: target,
@@ -56,6 +58,7 @@ const unpackOne = (target, output, file) => {
             files: file,
             quiet: true,
             forceOverwrite: true,
+            noRecursion: true
 // @ts-ignore
         }, (err, files, info) => {
             if (err) {
@@ -75,6 +78,7 @@ const extractFiles = (file, account) => {
     // @ts-ignore
     const {getFileExtension, renameFile} = require('./filename');
     // @ts-ignore
+
     return new Promise((resolve, reject) => {
         // @ts-ignore
         listAll(file).then((items => {
@@ -84,13 +88,14 @@ const extractFiles = (file, account) => {
                 fs.unlink(file, err => {
                     if (err) reject(err); else {
                         resolve('done');
+                        console.table(items);
                         console.log(`removed ${file} on local storage`);
                     }
                     // if no error, file has been deleted successfully
                 });
 
             });
-        })).catch(error => reject(error))
+        })).catch(error => console.error(error))
             // @ts-ignore
             .finally((status) => {
                 console.log('finally', status);
@@ -99,6 +104,7 @@ const extractFiles = (file, account) => {
 
 };
 // @ts-ignore
+
 module.exports = {
     extractFiles
 };
