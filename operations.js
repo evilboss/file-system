@@ -15,6 +15,8 @@ const {NODE_ENV, OUTGOING_FOLDER} = process.env;
 const fileOperations = {
 	// @ts-ignore
 	extract: (file, accountName) => {
+		// @ts-ignore
+
 		return new Promise(((resolve, reject) => {
 			extractFiles(file, accountName);
 			resolve('ok');
@@ -22,6 +24,8 @@ const fileOperations = {
 	},
 	// @ts-ignore
 	convert: (file) => {
+		// @ts-ignore
+
 		return new Promise(((resolve, reject) => {
 			conversion(file).then(result => {
 				return (result);
@@ -44,6 +48,8 @@ const fileOperations = {
 	},
 	// @ts-ignore
 	dontConvert: (file) => {
+		// @ts-ignore
+
 		return new Promise(
 			(resolve) => {
 				resolve({filename: file, imaginary: true});
@@ -51,12 +57,16 @@ const fileOperations = {
 	},
 	// @ts-ignore
 	uploadToFurtherProcessing: (file) => {
+		// @ts-ignore
+
 		return new Promise(resolve => {
 			resolve({filename: file, folder: OUTGOING_FOLDER})
 		})
 	},
 	// @ts-ignore
 	unsupported: (file) => {
+		// @ts-ignore
+
 		return new Promise(
 			(resolve) => {
 				resolve({filename: '', bucket: ''});
@@ -69,4 +79,5 @@ const getOperation = (ext) => {
 	// @ts-ignore
 	return fileOperations[ext];
 };
+// @ts-ignore
 module.exports = {getOperation};
