@@ -3,11 +3,14 @@ const request = require("request");
 // @ts-ignore
 const fs = require("fs");
 // @ts-ignore
-const {NODE_ENV, IMAGINARY_UPLOAD_URL} = process.env;
+
+const {uploadFile} = require('./uploader');
+// @ts-ignore
+const {NODE_ENV, IMAGINARY_UPLOAD_URL, PROCCESSED_FOLDER} = process.env;
 
 
 // @ts-ignore
-const uploadFile = (file, filename) => {
+const upload = (file, filename) => {
     // @ts-ignore
     return new Promise((resolve, reject) => {
         const options = {
@@ -27,14 +30,21 @@ const uploadFile = (file, filename) => {
         };
         console.log(options, file, filename);
         if (NODE_ENV !== 'local') {
+            if (PROCCESSED_FOLDER) {
+                console.log('processedFolder pressent');
+                console.log(file, filename);
+                uploadFile(file, `${PROCCESSED_FOLDER}/${filename}`);
 
-            // @ts-ignore
-            request(options, (error, response, body) => {
-                console.log(body);
-            });
+            } else {
+                // @ts-ignore
+                request(options, (error, response, body) => {
+                    console.log(body);
+                });
+            }
 
 
         }
+
         resolve(file);
     });
 };
@@ -42,6 +52,6 @@ const uploadFile = (file, filename) => {
 // @ts-ignore
 module.exports = {
     imaginary: {
-        uploadFile
+        upload: upload
     }
 };
