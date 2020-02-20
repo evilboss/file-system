@@ -4,8 +4,6 @@ const AWS = require('aws-sdk');
 // @ts-ignore
 const fs = require('fs');
 // @ts-ignore
-const config = require('./appConfig');
-// @ts-ignore
 const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, NODE_ENV} = process.env;
 const params = {
 	Bucket: S3_BUCKET,
@@ -18,7 +16,6 @@ const s3 = new AWS.S3({
 	accessKeyId: AWS_ACCESS_KEY_ID,
 	secretAccessKey: AWS_SECRET_ACCESS_KEY
 });
-/*TODO: check normal and other files*/
 
 // @ts-ignore
 const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
@@ -37,29 +34,27 @@ const uploadFile = (targetFile, fileName, buketName = S3_BUCKET) => {
 
 	// Uploading files to the bucket
 	// @ts-ignore
-	return new Promise((resolve, reject) => {
-		console.log(targetFile, fileName);
-		if (NODE_ENV !== 'local') {
-
-			s3.upload(params, (err, data) => {
-				if (err) reject(err);
+	console.log(targetFile, fileName);
+	if (NODE_ENV !== 'local') {
+		// @ts-ignore
+		s3.upload(params, (err, data) => {
+			if (err) {
+				console.error(err);
+			} else {
 				// @ts-ignore
 				fs.unlink(targetFile, err => {
-					if (err) reject(err);
+					if (err) console.error(err);
 					// if no error, file has been deleted successfully
 				});
 				console.log(`File uploaded successfully. ${data.Location}`);
-				resolve(`File uploaded successfully. ${data.Location}`);
+			}
 
+		});
 
-			});
-
-		}
-	});
-
+	}
 };
 //usage
 /*uploadFile('./storage/realfile1.txt', 'accountname/realfile1.txt');
 */
 // @ts-ignore
-module.exports = {uploadFile};
+module.exports = {uploadFile: uploadFile};
