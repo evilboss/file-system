@@ -53,6 +53,8 @@ const processFile = (file, account) => {
         console.error(error)
     });
 };
+// @ts-ignore
+
 module.exports = {
     processFile
 };
